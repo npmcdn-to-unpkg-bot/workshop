@@ -1,0 +1,87 @@
+// Container
+// --------------------------------------------------
+.container-fluid {
+    //max-width: 1200px;
+    margin: 0 auto;
+}
+
+// Begin Custom Styles
+// -------------------------------------------------- */ 
+.browsehappy {
+    margin: 0.2em 0;
+    background: $background;
+    color: $text;
+    padding: 0.2em 0;
+}
+
+body {
+    font-family: $font-sans;
+    background: $background !important;
+    color: $text !important;
+    text-rendering: optimizeLegibility;
+    padding: 0 !important;
+}
+
+p {
+    padding: 10px 0;
+    margin: 0;
+}
+
+a {
+    color: $text;
+    outline: 0;
+    padding-bottom: 1px;
+    border-bottom: 1px solid $text;
+    text-decoration: none;
+    cursor: pointer;
+    @include transition(all, 0.2s, ease-in-out);
+}
+
+a:hover,
+a:active {
+    color: lighten( $text, 40%);
+    border-color: lighten( $text, 40%);
+    outline: 0;
+}
+
+ul,
+ol,
+dl {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    -ms-interpolation-mode: bicubic;
+}
+
+blockquote {
+    border-left: 1px solid $text;
+    font-size: 14px;
+    line-height: 1.3em;
+    margin: 15px 0;
+    padding: 0 20px;
+}
+
+blockquote p {
+    font-size: 14px;
+    line-height: 1.3em;
+}
+
+blockquote footer {
+    color: $black;
+}
+
+// Clear content from the header evenly
+// --------------------------------------------------
+.page-content {
+    margin-top: 80px;
+    @include below(768px) {
+        margin-top: 90px;
+    }
+}

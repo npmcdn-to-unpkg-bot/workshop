@@ -1,0 +1,35 @@
+// font stack
+
+// sans
+@import url(//fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,300italic,400italic,600,600italic);
+// sans-serif
+@import url(//fonts.googleapis.com/css?family=Source+Serif+Pro:400,600,700);
+// mono
+@import url(//fonts.googleapis.com/css?family=Source+Code+Pro);
+// icon
+//@import url(//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css);
+// spin animation for loading icon
+
+.spin {
+  -ms-animation: spin 2s infinite linear;
+  -moz-animation: spin 2s infinite linear;
+  -webkit-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
+}
+
+@-ms-keyframes spin { 
+    from { -ms-transform: rotate(0deg); }
+    to { -ms-transform: rotate(359deg); }
+}
+@-moz-keyframes spin { 
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(359deg); }
+}
+@-webkit-keyframes spin { 
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(359deg); }
+}
+@keyframes spin { 
+    from { transform: rotate(0deg); }
+    to { transform: rotate(359deg); }
+}

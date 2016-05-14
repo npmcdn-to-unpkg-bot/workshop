@@ -1,0 +1,113 @@
+/*
+Theme Name: the workshop
+Theme URI: https://github.com/tryles/
+Author: tryl.es
+Author URI: http://tryl.es/
+Description:  Custom built theme
+Version: 1.0
+License: GNU General Public License v2 or later
+All content © the respective authors
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+@import 'vendor/vendor';
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* force scrollbar, prevents initial gap */
+html {
+  overflow-y: scroll; 
+}
+
+.hide {
+  display: none; 
+}
+
+/* GENERAL STYLES
+================================================== */
+html {
+  height: 100%; 
+}
+
+body {
+  height: 100%;
+  width: 100%; 
+  position: relative;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  -ms-interpolation-mode: bicubic;
+}
+
+p {
+  font-size: 18px;
+  line-height: 26px;
+  margin-bottom: 1em; 
+}
+
+a:focus {
+  outline: 0; 
+}
+
+.img-responsive {
+  max-width: 100%; 
+}
+
+#top {
+    height: 100%
+}
+
+.bottom {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+}
+
+#parent {
+    display: table;
+    height: 100%;
+    margin: 0 auto
+}
+
+#child {
+    display: table-cell;
+    vertical-align: middle
+}
+
+/* About
+================================================== */
+
+#about {
+    background: #fff;
+    width: 100%;
+    height: auto;
+}
+
+/* Image Gallery
+================================================== */
+
+.gallery {
+    background: #EEE;
+}
+
+.gallery img {
+    display: block;
+    height: 600px;
+}
