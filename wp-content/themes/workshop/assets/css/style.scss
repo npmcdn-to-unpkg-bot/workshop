@@ -26,6 +26,15 @@ body {
     box-sizing: border-box;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
 /* force scrollbar, prevents initial gap */
 html {
   overflow-y: scroll; 
@@ -69,8 +78,24 @@ a:focus {
   max-width: 100%; 
 }
 
+.container-fluid {
+    max-width: 1400px;
+}
+
+.cf-800 {
+    max-width: 900px;
+}
+
 #top {
-    height: 100%
+    width: 100%;
+    height: 100%;
+    // background: url();
+    background: url('assets/img/1.png') no-repeat center center; 
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+
 }
 
 .bottom {
@@ -88,7 +113,8 @@ a:focus {
 
 #child {
     display: table-cell;
-    vertical-align: middle
+    vertical-align: middle;
+    text-align: center;
 }
 
 /* About
@@ -97,7 +123,32 @@ a:focus {
 #about {
     background: #fff;
     width: 100%;
-    height: auto;
+    // height: 100%;
+    text-align: center;
+    background: #eeeeee;
+}
+
+#about h4 {
+    font-size: 2.4em;
+    line-height: 1.2em;
+    padding: 1.8em 0;
+}
+
+/* Social
+================================================== */
+
+#social {
+    background: #fff;
+    width: 100%;
+    // height: 100%;
+    text-align: center;
+    background: #eeeeee;
+}
+
+#social h4 {
+    font-size: 2.4em;
+    line-height: 1.2em;
+    padding: 1.8em 0;
 }
 
 /* Image Gallery
@@ -110,4 +161,32 @@ a:focus {
 .gallery img {
     display: block;
     height: 600px;
+}
+
+/* Contact
+================================================== */
+
+#map-canvas {
+    max-width: 100%;
+    height: 600px;
+    padding: 0px;
+}
+
+#map-canvas img {
+    /* Prevent streetview buddy from getting squished by img max-width: 100% */
+    max-width: none;
+}
+
+#infowindow-content {
+  padding: 20px 0 0;
+}
+
+#infowindow-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+#infowindow-content ul li {
+    padding-bottom: 3px;
+    color: #000;
 }
