@@ -30,7 +30,7 @@ var feed = new Instafeed({
     template: '<img src="{{image}}" />',
     resolution: 'standard_resolution',
     after: function() {
-        var flkty = new Flickity( '.gallery', {
+        var flkty = new Flickity( '.insta-gallery', {
           wrapAround: true, 
           freeScroll: true, 
           autoPlay: true, 

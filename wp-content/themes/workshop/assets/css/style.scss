@@ -89,13 +89,17 @@ a:focus {
 #top {
     width: 100%;
     height: 100%;
-    // background: url();
-    background: url('assets/img/1.png') no-repeat center center; 
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
 
+.gallery {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
 }
 
 .bottom {
@@ -108,13 +112,19 @@ a:focus {
 #parent {
     display: table;
     height: 100%;
-    margin: 0 auto
+    margin: 0 auto;
+    //position: absolute;
+    //z-index: 900;
 }
 
 #child {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
+}
+
+#child img {
+  margin-bottom: 20px;
 }
 
 /* About
@@ -126,12 +136,24 @@ a:focus {
     // height: 100%;
     text-align: center;
     background: #eeeeee;
+    // padding: 60px 0; 
 }
 
 #about h4 {
     font-size: 2.4em;
     line-height: 1.2em;
     padding: 1.8em 0;
+}
+
+/* Services
+================================================== */
+
+#services {
+  padding: 60px 0; 
+}
+
+#services img {
+  margin-bottom: 20px;
 }
 
 /* Social
@@ -154,11 +176,11 @@ a:focus {
 /* Image Gallery
 ================================================== */
 
-.gallery {
+.insta-gallery {
     background: #EEE;
 }
 
-.gallery img {
+.insta-gallery img {
     display: block;
     height: 600px;
 }
@@ -189,4 +211,11 @@ a:focus {
 #infowindow-content ul li {
     padding-bottom: 3px;
     color: #000;
+}
+
+/* Footer
+================================================== */
+
+#footer {
+  text-align: center;
 }

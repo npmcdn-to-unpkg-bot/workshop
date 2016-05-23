@@ -16,11 +16,13 @@
 *{box-sizing:border-box}h1,h2,h3,h4,h5,h6{margin:0}html{overflow-y:scroll}.hide{display:none}
 html{height:100%}body{height:100%;width:100%;position:relative}img{display:block;max-width:100%;height:auto;vertical-align:middle;-ms-interpolation-mode:bicubic}
 p{font-size:18px;line-height:26px;margin-bottom:1em}a:focus{outline:0}.img-responsive{max-width:100%}
-.container-fluid{max-width:1400px}.cf-800{max-width:900px}#top{width:100%;height:100%;background:url("assets/img/1.png") no-repeat center center;background-size:cover}
-.bottom{text-align:center;position:absolute;width:100%;bottom:10px}#parent{display:table;height:100%;margin:0 auto}
-#child{display:table-cell;vertical-align:middle;text-align:center}#about{background:#fff;width:100%;text-align:center;background:#eee}
-#about h4{font-size:2.4em;line-height:1.2em;padding:1.8em 0}#social{background:#fff;width:100%;text-align:center;background:#eee}
-#social h4{font-size:2.4em;line-height:1.2em;padding:1.8em 0}.gallery{background:#EEE}
-.gallery img{display:block;height:600px}#map-canvas{max-width:100%;height:600px;padding:0}
+.container-fluid{max-width:1400px}.cf-800{max-width:900px}#top{width:100%;height:100%;background-size:cover}
+.gallery{height:100%;width:100%;position:absolute;z-index:-1}.bottom{text-align:center;position:absolute;width:100%;bottom:10px}
+#parent{display:table;height:100%;margin:0 auto}#child{display:table-cell;vertical-align:middle;text-align:center}
+#child img{margin-bottom:20px}#about{background:#fff;width:100%;text-align:center;background:#eee}
+#about h4{font-size:2.4em;line-height:1.2em;padding:1.8em 0}#services{padding:60px 0}
+#services img{margin-bottom:20px}#social{background:#fff;width:100%;text-align:center;background:#eee}
+#social h4{font-size:2.4em;line-height:1.2em;padding:1.8em 0}.insta-gallery{background:#EEE}
+.insta-gallery img{display:block;height:600px}#map-canvas{max-width:100%;height:600px;padding:0}
 #map-canvas img{max-width:none}#infowindow-content{padding:20px 0 0}#infowindow-content ul{list-style:none;padding:0}
-#infowindow-content ul li{padding-bottom:3px;color:#000}
+#infowindow-content ul li{padding-bottom:3px;color:#000}#footer{text-align:center}

@@ -12,6 +12,18 @@ $content_right = get_field('content_right');
 ?>
 
 <section id="top">
+
+
+    <div class="gallery js-flickity" data-flickity-options='{ "autoPlay": 6000, "pageDots": false, "imagesLoaded": false, "prevNextButtons": false, "lazyLoad": false, "accessibility": false, "draggable": false, "wrapAround": true }'>
+
+        <?php foreach($gallery_images as $image) {
+            
+        echo '<div class="cell-full" style="width: 100%; height: 100%; background: url(' . $image['image'] . ') no-repeat center center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;" ></div>';
+            
+        } ?>
+        
+    </div><!-- /gallery /js-flickity -->
+
     <div id="parent">
         <div id="child">
             <a href="#about" class="scroll"><img src="http://placehold.it/540x320" alt=""></a>
@@ -19,11 +31,12 @@ $content_right = get_field('content_right');
             </h3>
         </div>
     </div>        
+
 </section>    
 
 <!-- About Section -->
 <section id="about">
-    <div class="container-fluid cf-800">
+    <div class="container-fluid cf-800 intro">
         <div class="row">
             <div class="col-sm-12">
                 <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde dolorem quis non ipsam reprehenderit dolorum totam aliquam quam veniam nam doloremque</h4>
@@ -61,7 +74,7 @@ $content_right = get_field('content_right');
     </div> 
 
     <!-- Flickity HTML init -->
-    <div id="instafeed" class="gallery"></div>
+    <div id="instafeed" class="insta-gallery"></div>
 
     <section id="contact">
         <div id="map-canvas"></div>
