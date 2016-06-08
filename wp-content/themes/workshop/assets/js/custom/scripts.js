@@ -22,11 +22,12 @@ $(document).ready(function() {
  });
    
 var feed = new Instafeed({
-    get: 'tagged',
-    // userId: '273854866',
-    tagName: 'catsofinstagram',
+    get: 'user',
+    userId: '1520017546',
+    accessToken: '1520017546.1677ed0.cd4a2fa0d9704b6f9e96840fc462d8f1',
+    // tagName: 'catsofinstagram',
     limit: 10,
-    clientId: 'daaccc39c0f24e33ac8ce76c0559e7fe',
+    clientId: '90220446068b4fc181e694d9e27cf0de',
     template: '<img src="{{image}}" />',
     resolution: 'standard_resolution',
     after: function() {
