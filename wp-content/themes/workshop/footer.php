@@ -1,6 +1,6 @@
 <footer id="footer">
 	<span class="small">
-		&copy; The Workshop <?php echo date("Y"); ?>.
+		&copy; The Workshop Gilding <?php echo date("Y"); ?>.
 	</span>
 </footer>
 <!-- JavaScript
