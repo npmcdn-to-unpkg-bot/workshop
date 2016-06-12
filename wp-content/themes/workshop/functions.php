@@ -10,20 +10,28 @@ if ( version_compare( $GLOBALS['wp_version'], '4.1-alpha', '<' ) ) {
  * Enqueue scripts and styles the correct way
  */
 
-/*function workshop_scripts() {
+function workshop_scripts() {
 	wp_enqueue_style( 'workshop-style', get_stylesheet_uri() );
+    
+    if (!is_admin() && $GLOBALS['pagenow'] != 'wp-login.php') {
+        // comment out the next two lines to load the local copy of jQuery
+        wp_deregister_script('jquery');
+        wp_register_script('jquery', '//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js', false, '2.1.4');
+        wp_enqueue_script('jquery');
+    }
 
-	wp_enqueue_script( 'workshop-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
+    wp_register_script('jquery-ui', '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js', false, '1.11.1');
+    wp_enqueue_script('jquery-ui');
 
-	wp_enqueue_script( 'workshop-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
+	//wp_enqueue_script( 'workshop-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
+	//wp_enqueue_script( 'workshop-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
+
 }
-add_action( 'wp_enqueue_scripts', 'workshop_scripts' );*/
+add_action( 'wp_enqueue_scripts', 'workshop_scripts' );
 
 // Remove Crap in head
+remove_action( 'wp_head', 'rest_output_link_wp_head', 10 );
 remove_action( 'wp_head', 'feed_links_extra', 3 ); // Display the links to the extra feeds such as category feeds
 remove_action( 'wp_head', 'feed_links', 2 ); // Display the links to the general feeds: Post and Comment Feed
 remove_action( 'wp_head', 'rsd_link' ); // Display the link to the Really Simple Discovery service endpoint, EditURI link

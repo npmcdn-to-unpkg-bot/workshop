@@ -4,6 +4,16 @@
   * For details, see http://www.apache.org/licenses/LICENSE-2.0.
   */
 
+  $(window).load(function() {
+        
+    if ( $('#loader_wrap').length > 0 ) {
+        setTimeout(function() {
+            $('#loader_wrap').fadeOut(600);
+        }, 1000);
+    }
+    
+});
+
 $(document).ready(function() {
 
      $(".scroll").click(function(event) {
@@ -17,6 +27,55 @@ $(document).ready(function() {
          $('html, body').animate({
              scrollTop: target_top
          }, 500);
+     });
+
+     var deleteLog = false;
+   
+     $('#pagepiling').pagepiling({
+         menu: '#menu',
+         // anchors: [],
+         navigation: false,
+         // anchors: ['page1', 'page2'],
+         easingcss3: 'ease-in-out',
+         sectionsColor: ['#bfda00', '#2ebe21'],
+         onLeave: function(index, nextIndex, direction){
+             if(deleteLog){
+                 //$('#callbacksDiv').html('');
+             }
+             //$('#callbacksDiv').append('<p>onLeave - index:' + index + ' nextIndex:' + nextIndex + ' direction:' + direction + '</p>')
+         },
+         afterRender: function(){
+             //$('#callbacksDiv').append('<p>afterRender</p>');
+         },
+         afterLoad: function(anchorLink, index){
+             //$('#callbacksDiv').append('<p>afterLoad - anchorLink:' + anchorLink + " index:" + index + '</p>');
+
+             //section 2
+             if(index == 2){
+                 //moving the image
+                 $('#section2').find('.intro').delay(100).animate({
+                     left: '0%'
+                 }, 1500, 'easeOutExpo', function(){
+                     $('#section2').find('img').first().fadeIn(700, function(){
+                         // $('#section2').find('p').last().fadeIn(600);
+                     });
+                 });
+
+
+             }
+
+             deleteLog = true;
+         }
+     });
+
+     $( "#next" ).on( "click", function(e) {
+        e.preventDefault;
+        $.fn.pagepiling.moveSectionDown();
+     });
+
+     $( "#prev" ).on( "click", function(e) {
+        e.preventDefault;
+        $.fn.pagepiling.moveSectionUp();
      });
 
  });
@@ -111,7 +170,7 @@ function initialize() {
         title: 'The Workshop Custom Gilding'
     });
 
-    var circle = new google.maps.Circle({
+    /*var circle = new google.maps.Circle({
         strokeColor: '#c21f31',
         strokeOpacity: 0.5,
         strokeWeight: 2,
@@ -120,7 +179,7 @@ function initialize() {
         map: map,
         center: workshop,
         radius: 160
-    });
+    });*/
 
     google.maps.event.addListener(marker, 'click', function() {
         infowindow.open(map, marker);

@@ -23,11 +23,6 @@
 	  }
 	}
 </script>
-<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
-<link rel='stylesheet prefetch' href='//cdnjs.cloudflare.com/ajax/libs/flickity/1.2.1/flickity.min.css'>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-<link href="<?php bloginfo ( 'stylesheet_directory' ); ?>/style.css" rel="stylesheet" type="text/css"> <!-- swap up to .min.css for export -->
-<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
 <?php wp_head(); ?>
 
 <body <?php body_class(); ?>>
@@ -36,7 +31,7 @@
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<header id="header">
+<!-- <header id="header">
 
 	<nav class="site-nav" role="navigation">
 		<?php
@@ -54,4 +49,4 @@
 		?>
 	</nav>	
 
-</header> 
+</header>  -->

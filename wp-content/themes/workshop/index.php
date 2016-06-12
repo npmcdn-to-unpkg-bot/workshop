@@ -11,26 +11,36 @@ $content_right = get_field('content_right');
 
 ?>
 
+<div id="loader_wrap"></div>
+
 <section id="top">
 
+    <ul id="menu" style="position: absolute;top: 50%;right: 20px;z-index: 200; font-size: 3em;list-style:none;margin:0;padding:0;margin-top:-60px">
+        <li class="active"><a id="prev" href="#">Prev</a></li>
+        <li><a id="next" href="#">Next</a></li>
+    </ul>
 
-    <div class="gallery js-flickity" data-flickity-options='{ "autoPlay": 6000, "pageDots": false, "imagesLoaded": false, "prevNextButtons": false, "lazyLoad": false, "accessibility": false, "draggable": false, "wrapAround": true }'>
+    <div id="pagepiling">
+        <div class="section" id="section1">
+            <h1>The Workshop</h1>
+            <p>Totally open to your imagination!</p>
+            <br />
+        </div>
+        <div class="section" id="section2">
+            <div class="intro">
+                <h1>Feel free</h1>
+                <a style="display: inline-block;" href="#about" class="scroll"><img style="display: none;" src="http://placehold.it/540x320" alt=""></a>
+            </div>
+        </div>
+    </div>
 
-        <?php foreach($gallery_images as $image) {
-            
-        echo '<div class="cell-full" style="width: 100%; height: 100%; background: url(' . $image['image'] . ') no-repeat center center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;" ></div>';
-            
-        } ?>
-        
-    </div><!-- /gallery /js-flickity -->
-
-    <div id="parent">
+    <!-- <div id="parent">
         <div id="child">
             <a href="#about" class="scroll"><img src="http://placehold.it/540x320" alt=""></a>
             <h3 class="tagline centered">Foo Bar Baz<br>
             </h3>
         </div>
-    </div>        
+    </div>    -->     
 
 </section>    
 
@@ -75,11 +85,10 @@ $content_right = get_field('content_right');
 
     <!-- Flickity HTML init -->
     <div id="instafeed" class="insta-gallery"></div>
+</section>
 
-    <section id="contact">
-        <div id="map-canvas"></div>
-    </section>
-
+<section id="contact">
+    <div id="map-canvas"></div>
 </section>
 
 <?php
