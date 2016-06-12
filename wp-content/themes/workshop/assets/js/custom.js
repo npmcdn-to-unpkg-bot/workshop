@@ -125,11 +125,11 @@ function initialize() {
         scrollwheel: false,
         zoomControl: true,
         zoomControlOptions: {
-            position: google.maps.ControlPosition.RIGHT_TOP
+            position: google.maps.ControlPosition.LEFT_TOP
         },
         streetViewControl: true,
         streetViewControlOptions: {
-            position: google.maps.ControlPosition.RIGHT_TOP
+            position: google.maps.ControlPosition.LEFT_TOP
         },
         mapTypeId: MY_MAPTYPE_ID
     };

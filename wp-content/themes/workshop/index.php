@@ -88,7 +88,16 @@ $content_right = get_field('content_right');
 </section>
 
 <section id="contact">
-    <div id="map-canvas"></div>
+    <div class="row nm">
+        <div class="col-sm-6 np">
+            <div id="map-canvas"></div>
+        </div>
+        <div class="col-sm-6 np">
+            <div id="location">
+                <h2>Our Location</h2>
+            </div>
+        </div>
+    </div>
 </section>
 
 <?php

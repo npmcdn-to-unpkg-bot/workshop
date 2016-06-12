@@ -214,87 +214,6 @@ if ( typeof define === 'function' && define.amd ) {
 
 })( window );
 
-/*!
- * docReady v1.0.4
- * Cross browser DOMContentLoaded event emitter
- * MIT license
- */
-
-/*jshint browser: true, strict: true, undef: true, unused: true*/
-/*global define: false, require: false, module: false */
-
-( function( window ) {
-
-'use strict';
-
-var document = window.document;
-// collection of functions to be triggered on ready
-var queue = [];
-
-function docReady( fn ) {
-  // throw out non-functions
-  if ( typeof fn !== 'function' ) {
-    return;
-  }
-
-  if ( docReady.isReady ) {
-    // ready now, hit it
-    fn();
-  } else {
-    // queue function when ready
-    queue.push( fn );
-  }
-}
-
-docReady.isReady = false;
-
-// triggered on various doc ready events
-function onReady( event ) {
-  // bail if already triggered or IE8 document is not ready just yet
-  var isIE8NotReady = event.type === 'readystatechange' && document.readyState !== 'complete';
-  if ( docReady.isReady || isIE8NotReady ) {
-    return;
-  }
-
-  trigger();
-}
-
-function trigger() {
-  docReady.isReady = true;
-  // process queue
-  for ( var i=0, len = queue.length; i < len; i++ ) {
-    var fn = queue[i];
-    fn();
-  }
-}
-
-function defineDocReady( eventie ) {
-  // trigger ready if page is ready
-  if ( document.readyState === 'complete' ) {
-    trigger();
-  } else {
-    // listen for events
-    eventie.bind( document, 'DOMContentLoaded', onReady );
-    eventie.bind( document, 'readystatechange', onReady );
-    eventie.bind( window, 'load', onReady );
-  }
-
-  return docReady;
-}
-
-// transport
-if ( typeof define === 'function' && define.amd ) {
-  // AMD
-  define( [ 'eventie/eventie' ], defineDocReady );
-} else if ( typeof exports === 'object' ) {
-  module.exports = defineDocReady( require('eventie') );
-} else {
-  // browser global
-  window.docReady = defineDocReady( window.eventie );
-}
-
-})( window );
-
 /**
  * EvEmitter v1.0.3
  * Lil' event emitter
@@ -885,6 +804,87 @@ return EvEmitter;
  * @preserve
  */
 (function(){"use strict";function t(){}function i(t,n){for(var e=t.length;e--;)if(t[e].listener===n)return e;return-1}function n(e){return function(){return this[e].apply(this,arguments)}}var e=t.prototype,r=this,s=r.EventEmitter;e.getListeners=function(n){var r,e,t=this._getEvents();if(n instanceof RegExp){r={};for(e in t)t.hasOwnProperty(e)&&n.test(e)&&(r[e]=t[e])}else r=t[n]||(t[n]=[]);return r},e.flattenListeners=function(t){var e,n=[];for(e=0;e<t.length;e+=1)n.push(t[e].listener);return n},e.getListenersAsObject=function(n){var e,t=this.getListeners(n);return t instanceof Array&&(e={},e[n]=t),e||t},e.addListener=function(r,e){var t,n=this.getListenersAsObject(r),s="object"==typeof e;for(t in n)n.hasOwnProperty(t)&&-1===i(n[t],e)&&n[t].push(s?e:{listener:e,once:!1});return this},e.on=n("addListener"),e.addOnceListener=function(e,t){return this.addListener(e,{listener:t,once:!0})},e.once=n("addOnceListener"),e.defineEvent=function(e){return this.getListeners(e),this},e.defineEvents=function(t){for(var e=0;e<t.length;e+=1)this.defineEvent(t[e]);return this},e.removeListener=function(r,s){var n,e,t=this.getListenersAsObject(r);for(e in t)t.hasOwnProperty(e)&&(n=i(t[e],s),-1!==n&&t[e].splice(n,1));return this},e.off=n("removeListener"),e.addListeners=function(e,t){return this.manipulateListeners(!1,e,t)},e.removeListeners=function(e,t){return this.manipulateListeners(!0,e,t)},e.manipulateListeners=function(r,t,i){var e,n,s=r?this.removeListener:this.addListener,o=r?this.removeListeners:this.addListeners;if("object"!=typeof t||t instanceof RegExp)for(e=i.length;e--;)s.call(this,t,i[e]);else for(e in t)t.hasOwnProperty(e)&&(n=t[e])&&("function"==typeof n?s.call(this,e,n):o.call(this,e,n));return this},e.removeEvent=function(e){var t,r=typeof e,n=this._getEvents();if("string"===r)delete n[e];else if(e instanceof RegExp)for(t in n)n.hasOwnProperty(t)&&e.test(t)&&delete n[t];else delete this._events;return this},e.removeAllListeners=n("removeEvent"),e.emitEvent=function(r,o){var e,i,t,s,n=this.getListenersAsObject(r);for(t in n)if(n.hasOwnProperty(t))for(i=n[t].length;i--;)e=n[t][i],e.once===!0&&this.removeListener(r,e.listener),s=e.listener.apply(this,o||[]),s===this._getOnceReturnValue()&&this.removeListener(r,e.listener);return this},e.trigger=n("emitEvent"),e.emit=function(e){var t=Array.prototype.slice.call(arguments,1);return this.emitEvent(e,t)},e.setOnceReturnValue=function(e){return this._onceReturnValue=e,this},e._getOnceReturnValue=function(){return this.hasOwnProperty("_onceReturnValue")?this._onceReturnValue:!0},e._getEvents=function(){return this._events||(this._events={})},t.noConflict=function(){return r.EventEmitter=s,t},"function"==typeof define&&define.amd?define(function(){return t}):"object"==typeof module&&module.exports?module.exports=t:r.EventEmitter=t}).call(this);
+/*!
+ * docReady v1.0.4
+ * Cross browser DOMContentLoaded event emitter
+ * MIT license
+ */
+
+/*jshint browser: true, strict: true, undef: true, unused: true*/
+/*global define: false, require: false, module: false */
+
+( function( window ) {
+
+'use strict';
+
+var document = window.document;
+// collection of functions to be triggered on ready
+var queue = [];
+
+function docReady( fn ) {
+  // throw out non-functions
+  if ( typeof fn !== 'function' ) {
+    return;
+  }
+
+  if ( docReady.isReady ) {
+    // ready now, hit it
+    fn();
+  } else {
+    // queue function when ready
+    queue.push( fn );
+  }
+}
+
+docReady.isReady = false;
+
+// triggered on various doc ready events
+function onReady( event ) {
+  // bail if already triggered or IE8 document is not ready just yet
+  var isIE8NotReady = event.type === 'readystatechange' && document.readyState !== 'complete';
+  if ( docReady.isReady || isIE8NotReady ) {
+    return;
+  }
+
+  trigger();
+}
+
+function trigger() {
+  docReady.isReady = true;
+  // process queue
+  for ( var i=0, len = queue.length; i < len; i++ ) {
+    var fn = queue[i];
+    fn();
+  }
+}
+
+function defineDocReady( eventie ) {
+  // trigger ready if page is ready
+  if ( document.readyState === 'complete' ) {
+    trigger();
+  } else {
+    // listen for events
+    eventie.bind( document, 'DOMContentLoaded', onReady );
+    eventie.bind( document, 'readystatechange', onReady );
+    eventie.bind( window, 'load', onReady );
+  }
+
+  return docReady;
+}
+
+// transport
+if ( typeof define === 'function' && define.amd ) {
+  // AMD
+  define( [ 'eventie/eventie' ], defineDocReady );
+} else if ( typeof exports === 'object' ) {
+  module.exports = defineDocReady( require('eventie') );
+} else {
+  // browser global
+  window.docReady = defineDocReady( window.eventie );
+}
+
+})( window );
+
 /*!
  * eventie v1.0.6
  * event binding helper
@@ -19762,6 +19762,114 @@ module.exports = function (grunt) {
 
 };
 
+/**
+ * matchesSelector v1.0.3
+ * matchesSelector( element, '.selector' )
+ * MIT license
+ */
+
+/*jshint browser: true, strict: true, undef: true, unused: true */
+/*global define: false, module: false */
+
+( function( ElemProto ) {
+
+  'use strict';
+
+  var matchesMethod = ( function() {
+    // check for the standard method name first
+    if ( ElemProto.matches ) {
+      return 'matches';
+    }
+    // check un-prefixed
+    if ( ElemProto.matchesSelector ) {
+      return 'matchesSelector';
+    }
+    // check vendor prefixes
+    var prefixes = [ 'webkit', 'moz', 'ms', 'o' ];
+
+    for ( var i=0, len = prefixes.length; i < len; i++ ) {
+      var prefix = prefixes[i];
+      var method = prefix + 'MatchesSelector';
+      if ( ElemProto[ method ] ) {
+        return method;
+      }
+    }
+  })();
+
+  // ----- match ----- //
+
+  function match( elem, selector ) {
+    return elem[ matchesMethod ]( selector );
+  }
+
+  // ----- appendToFragment ----- //
+
+  function checkParent( elem ) {
+    // not needed if already has parent
+    if ( elem.parentNode ) {
+      return;
+    }
+    var fragment = document.createDocumentFragment();
+    fragment.appendChild( elem );
+  }
+
+  // ----- query ----- //
+
+  // fall back to using QSA
+  // thx @jonathantneal https://gist.github.com/3062955
+  function query( elem, selector ) {
+    // append to fragment if no parent
+    checkParent( elem );
+
+    // match elem with all selected elems of parent
+    var elems = elem.parentNode.querySelectorAll( selector );
+    for ( var i=0, len = elems.length; i < len; i++ ) {
+      // return true if match
+      if ( elems[i] === elem ) {
+        return true;
+      }
+    }
+    // otherwise return false
+    return false;
+  }
+
+  // ----- matchChild ----- //
+
+  function matchChild( elem, selector ) {
+    checkParent( elem );
+    return match( elem, selector );
+  }
+
+  // ----- matchesSelector ----- //
+
+  var matchesSelector;
+
+  if ( matchesMethod ) {
+    // IE9 supports matchesSelector, but doesn't work on orphaned elems
+    // check for that
+    var div = document.createElement('div');
+    var supportsOrphans = match( div, 'div' );
+    matchesSelector = supportsOrphans ? match : matchChild;
+  } else {
+    matchesSelector = query;
+  }
+
+  // transport
+  if ( typeof define === 'function' && define.amd ) {
+    // AMD
+    define( function() {
+      return matchesSelector;
+    });
+  } else if ( typeof exports === 'object' ) {
+    module.exports = matchesSelector;
+  }
+  else {
+    // browser global
+    window.matchesSelector = matchesSelector;
+  }
+
+})( Element.prototype );
+
 /*!
  * pagepiling.js 1.5.3
  *
@@ -20765,114 +20873,6 @@ a);b(this).css("z-index",y);a||0!==b(".pp-section.active").length||b(this).addCl
 2+"px"),b("#pp-nav").find("li").eq(b(".pp-section.active").index(".pp-section")).find("a").addClass("active"));b(k).on("load",function(){var a=k.location.hash.replace("#",""),a=b(h).find('.pp-section[data-anchor="'+a+'"]');0<a.length&&l(a,c.animateAnchor)});b.isFunction(c.afterRender)&&c.afterRender.call(this)});b(k).on("hashchange",function(){var a=k.location.hash.replace("#","").split("/")[0];a.length&&a&&a!==A&&(a=isNaN(a)?b(h).find('[data-anchor="'+a+'"]'):b(".pp-section").eq(a-1),l(a))});b(h).keydown(function(a){if(c.keyboardScrolling&&
 !x())switch(a.which){case 38:case 33:e.moveSectionUp();break;case 40:case 34:e.moveSectionDown();break;case 36:e.moveTo(1);break;case 35:e.moveTo(b(".pp-section").length);break;case 37:e.moveSectionUp();break;case 39:e.moveSectionDown()}});c.normalScrollElements&&(b(h).on("mouseenter",c.normalScrollElements,function(){e.setMouseWheelScrolling(!1)}),b(h).on("mouseleave",c.normalScrollElements,function(){e.setMouseWheelScrolling(!0)}));var F=(new Date).getTime();b(h).on("click touchstart","#pp-nav a",
 function(a){a.preventDefault();a=b(this).parent().index();l(b(".pp-section").eq(a))});b(h).on({mouseenter:function(){var a=b(this).data("tooltip");b('<div class="pp-tooltip '+c.navigation.position+'">'+a+"</div>").hide().appendTo(b(this)).fadeIn(200)},mouseleave:function(){b(this).find(".pp-tooltip").fadeOut(200,function(){b(this).remove()})}},"#pp-nav li")}})(jQuery,document,window);
-/**
- * matchesSelector v1.0.3
- * matchesSelector( element, '.selector' )
- * MIT license
- */
-
-/*jshint browser: true, strict: true, undef: true, unused: true */
-/*global define: false, module: false */
-
-( function( ElemProto ) {
-
-  'use strict';
-
-  var matchesMethod = ( function() {
-    // check for the standard method name first
-    if ( ElemProto.matches ) {
-      return 'matches';
-    }
-    // check un-prefixed
-    if ( ElemProto.matchesSelector ) {
-      return 'matchesSelector';
-    }
-    // check vendor prefixes
-    var prefixes = [ 'webkit', 'moz', 'ms', 'o' ];
-
-    for ( var i=0, len = prefixes.length; i < len; i++ ) {
-      var prefix = prefixes[i];
-      var method = prefix + 'MatchesSelector';
-      if ( ElemProto[ method ] ) {
-        return method;
-      }
-    }
-  })();
-
-  // ----- match ----- //
-
-  function match( elem, selector ) {
-    return elem[ matchesMethod ]( selector );
-  }
-
-  // ----- appendToFragment ----- //
-
-  function checkParent( elem ) {
-    // not needed if already has parent
-    if ( elem.parentNode ) {
-      return;
-    }
-    var fragment = document.createDocumentFragment();
-    fragment.appendChild( elem );
-  }
-
-  // ----- query ----- //
-
-  // fall back to using QSA
-  // thx @jonathantneal https://gist.github.com/3062955
-  function query( elem, selector ) {
-    // append to fragment if no parent
-    checkParent( elem );
-
-    // match elem with all selected elems of parent
-    var elems = elem.parentNode.querySelectorAll( selector );
-    for ( var i=0, len = elems.length; i < len; i++ ) {
-      // return true if match
-      if ( elems[i] === elem ) {
-        return true;
-      }
-    }
-    // otherwise return false
-    return false;
-  }
-
-  // ----- matchChild ----- //
-
-  function matchChild( elem, selector ) {
-    checkParent( elem );
-    return match( elem, selector );
-  }
-
-  // ----- matchesSelector ----- //
-
-  var matchesSelector;
-
-  if ( matchesMethod ) {
-    // IE9 supports matchesSelector, but doesn't work on orphaned elems
-    // check for that
-    var div = document.createElement('div');
-    var supportsOrphans = match( div, 'div' );
-    matchesSelector = supportsOrphans ? match : matchChild;
-  } else {
-    matchesSelector = query;
-  }
-
-  // transport
-  if ( typeof define === 'function' && define.amd ) {
-    // AMD
-    define( function() {
-      return matchesSelector;
-    });
-  } else if ( typeof exports === 'object' ) {
-    module.exports = matchesSelector;
-  }
-  else {
-    // browser global
-    window.matchesSelector = matchesSelector;
-  }
-
-})( Element.prototype );
-
 /*!
  * Tap listener v1.1.2
  * listens to taps
@@ -20985,323 +20985,6 @@ TapListener.prototype.destroy = function() {
 // -----  ----- //
 
 return TapListener;
-
-}));
-
-/*!
- * Unipointer v1.1.0
- * base class for doing one thing with pointer event
- * MIT license
- */
-
-/*jshint browser: true, undef: true, unused: true, strict: true */
-/*global define: false, module: false, require: false */
-
-( function( window, factory ) {
-  'use strict';
-  // universal module definition
-
-  if ( typeof define == 'function' && define.amd ) {
-    // AMD
-    define( [
-      'eventEmitter/EventEmitter',
-      'eventie/eventie'
-    ], function( EventEmitter, eventie ) {
-      return factory( window, EventEmitter, eventie );
-    });
-  } else if ( typeof exports == 'object' ) {
-    // CommonJS
-    module.exports = factory(
-      window,
-      require('wolfy87-eventemitter'),
-      require('eventie')
-    );
-  } else {
-    // browser global
-    window.Unipointer = factory(
-      window,
-      window.EventEmitter,
-      window.eventie
-    );
-  }
-
-}( window, function factory( window, EventEmitter, eventie ) {
-
-'use strict';
-
-function noop() {}
-
-function Unipointer() {}
-
-// inherit EventEmitter
-Unipointer.prototype = new EventEmitter();
-
-Unipointer.prototype.bindStartEvent = function( elem ) {
-  this._bindStartEvent( elem, true );
-};
-
-Unipointer.prototype.unbindStartEvent = function( elem ) {
-  this._bindStartEvent( elem, false );
-};
-
-/**
- * works as unbinder, as you can ._bindStart( false ) to unbind
- * @param {Boolean} isBind - will unbind if falsey
- */
-Unipointer.prototype._bindStartEvent = function( elem, isBind ) {
-  // munge isBind, default to true
-  isBind = isBind === undefined ? true : !!isBind;
-  var bindMethod = isBind ? 'bind' : 'unbind';
-
-  if ( window.navigator.pointerEnabled ) {
-    // W3C Pointer Events, IE11. See https://coderwall.com/p/mfreca
-    eventie[ bindMethod ]( elem, 'pointerdown', this );
-  } else if ( window.navigator.msPointerEnabled ) {
-    // IE10 Pointer Events
-    eventie[ bindMethod ]( elem, 'MSPointerDown', this );
-  } else {
-    // listen for both, for devices like Chrome Pixel
-    eventie[ bindMethod ]( elem, 'mousedown', this );
-    eventie[ bindMethod ]( elem, 'touchstart', this );
-  }
-};
-
-// trigger handler methods for events
-Unipointer.prototype.handleEvent = function( event ) {
-  var method = 'on' + event.type;
-  if ( this[ method ] ) {
-    this[ method ]( event );
-  }
-};
-
-// returns the touch that we're keeping track of
-Unipointer.prototype.getTouch = function( touches ) {
-  for ( var i=0, len = touches.length; i < len; i++ ) {
-    var touch = touches[i];
-    if ( touch.identifier == this.pointerIdentifier ) {
-      return touch;
-    }
-  }
-};
-
-// ----- start event ----- //
-
-Unipointer.prototype.onmousedown = function( event ) {
-  // dismiss clicks from right or middle buttons
-  var button = event.button;
-  if ( button && ( button !== 0 && button !== 1 ) ) {
-    return;
-  }
-  this._pointerDown( event, event );
-};
-
-Unipointer.prototype.ontouchstart = function( event ) {
-  this._pointerDown( event, event.changedTouches[0] );
-};
-
-Unipointer.prototype.onMSPointerDown =
-Unipointer.prototype.onpointerdown = function( event ) {
-  this._pointerDown( event, event );
-};
-
-/**
- * pointer start
- * @param {Event} event
- * @param {Event or Touch} pointer
- */
-Unipointer.prototype._pointerDown = function( event, pointer ) {
-  // dismiss other pointers
-  if ( this.isPointerDown ) {
-    return;
-  }
-
-  this.isPointerDown = true;
-  // save pointer identifier to match up touch events
-  this.pointerIdentifier = pointer.pointerId !== undefined ?
-    // pointerId for pointer events, touch.indentifier for touch events
-    pointer.pointerId : pointer.identifier;
-
-  this.pointerDown( event, pointer );
-};
-
-Unipointer.prototype.pointerDown = function( event, pointer ) {
-  this._bindPostStartEvents( event );
-  this.emitEvent( 'pointerDown', [ event, pointer ] );
-};
-
-// hash of events to be bound after start event
-var postStartEvents = {
-  mousedown: [ 'mousemove', 'mouseup' ],
-  touchstart: [ 'touchmove', 'touchend', 'touchcancel' ],
-  pointerdown: [ 'pointermove', 'pointerup', 'pointercancel' ],
-  MSPointerDown: [ 'MSPointerMove', 'MSPointerUp', 'MSPointerCancel' ]
-};
-
-Unipointer.prototype._bindPostStartEvents = function( event ) {
-  if ( !event ) {
-    return;
-  }
-  // get proper events to match start event
-  var events = postStartEvents[ event.type ];
-  // IE8 needs to be bound to document
-  var node = event.preventDefault ? window : document;
-  // bind events to node
-  for ( var i=0, len = events.length; i < len; i++ ) {
-    var evnt = events[i];
-    eventie.bind( node, evnt, this );
-  }
-  // save these arguments
-  this._boundPointerEvents = {
-    events: events,
-    node: node
-  };
-};
-
-Unipointer.prototype._unbindPostStartEvents = function() {
-  var args = this._boundPointerEvents;
-  // IE8 can trigger dragEnd twice, check for _boundEvents
-  if ( !args || !args.events ) {
-    return;
-  }
-
-  for ( var i=0, len = args.events.length; i < len; i++ ) {
-    var event = args.events[i];
-    eventie.unbind( args.node, event, this );
-  }
-  delete this._boundPointerEvents;
-};
-
-// ----- move event ----- //
-
-Unipointer.prototype.onmousemove = function( event ) {
-  this._pointerMove( event, event );
-};
-
-Unipointer.prototype.onMSPointerMove =
-Unipointer.prototype.onpointermove = function( event ) {
-  if ( event.pointerId == this.pointerIdentifier ) {
-    this._pointerMove( event, event );
-  }
-};
-
-Unipointer.prototype.ontouchmove = function( event ) {
-  var touch = this.getTouch( event.changedTouches );
-  if ( touch ) {
-    this._pointerMove( event, touch );
-  }
-};
-
-/**
- * pointer move
- * @param {Event} event
- * @param {Event or Touch} pointer
- * @private
- */
-Unipointer.prototype._pointerMove = function( event, pointer ) {
-  this.pointerMove( event, pointer );
-};
-
-// public
-Unipointer.prototype.pointerMove = function( event, pointer ) {
-  this.emitEvent( 'pointerMove', [ event, pointer ] );
-};
-
-// ----- end event ----- //
-
-
-Unipointer.prototype.onmouseup = function( event ) {
-  this._pointerUp( event, event );
-};
-
-Unipointer.prototype.onMSPointerUp =
-Unipointer.prototype.onpointerup = function( event ) {
-  if ( event.pointerId == this.pointerIdentifier ) {
-    this._pointerUp( event, event );
-  }
-};
-
-Unipointer.prototype.ontouchend = function( event ) {
-  var touch = this.getTouch( event.changedTouches );
-  if ( touch ) {
-    this._pointerUp( event, touch );
-  }
-};
-
-/**
- * pointer up
- * @param {Event} event
- * @param {Event or Touch} pointer
- * @private
- */
-Unipointer.prototype._pointerUp = function( event, pointer ) {
-  this._pointerDone();
-  this.pointerUp( event, pointer );
-};
-
-// public
-Unipointer.prototype.pointerUp = function( event, pointer ) {
-  this.emitEvent( 'pointerUp', [ event, pointer ] );
-};
-
-// ----- pointer done ----- //
-
-// triggered on pointer up & pointer cancel
-Unipointer.prototype._pointerDone = function() {
-  // reset properties
-  this.isPointerDown = false;
-  delete this.pointerIdentifier;
-  // remove events
-  this._unbindPostStartEvents();
-  this.pointerDone();
-};
-
-Unipointer.prototype.pointerDone = noop;
-
-// ----- pointer cancel ----- //
-
-Unipointer.prototype.onMSPointerCancel =
-Unipointer.prototype.onpointercancel = function( event ) {
-  if ( event.pointerId == this.pointerIdentifier ) {
-    this._pointerCancel( event, event );
-  }
-};
-
-Unipointer.prototype.ontouchcancel = function( event ) {
-  var touch = this.getTouch( event.changedTouches );
-  if ( touch ) {
-    this._pointerCancel( event, touch );
-  }
-};
-
-/**
- * pointer cancel
- * @param {Event} event
- * @param {Event or Touch} pointer
- * @private
- */
-Unipointer.prototype._pointerCancel = function( event, pointer ) {
-  this._pointerDone();
-  this.pointerCancel( event, pointer );
-};
-
-// public
-Unipointer.prototype.pointerCancel = function( event, pointer ) {
-  this.emitEvent( 'pointerCancel', [ event, pointer ] );
-};
-
-// -----  ----- //
-
-// utility function for getting x/y cooridinates from event, because IE8
-Unipointer.getPointerPoint = function( pointer ) {
-  return {
-    x: pointer.pageX !== undefined ? pointer.pageX : pointer.clientX,
-    y: pointer.pageY !== undefined ? pointer.pageY : pointer.clientY
-  };
-};
-
-// -----  ----- //
-
-return Unipointer;
 
 }));
 
@@ -21672,6 +21355,326 @@ return Unidragger;
 
 }));
 
+/*!
+ * Unipointer v1.1.0
+ * base class for doing one thing with pointer event
+ * MIT license
+ */
+
+/*jshint browser: true, undef: true, unused: true, strict: true */
+/*global define: false, module: false, require: false */
+
+( function( window, factory ) {
+  'use strict';
+  // universal module definition
+
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD
+    define( [
+      'eventEmitter/EventEmitter',
+      'eventie/eventie'
+    ], function( EventEmitter, eventie ) {
+      return factory( window, EventEmitter, eventie );
+    });
+  } else if ( typeof exports == 'object' ) {
+    // CommonJS
+    module.exports = factory(
+      window,
+      require('wolfy87-eventemitter'),
+      require('eventie')
+    );
+  } else {
+    // browser global
+    window.Unipointer = factory(
+      window,
+      window.EventEmitter,
+      window.eventie
+    );
+  }
+
+}( window, function factory( window, EventEmitter, eventie ) {
+
+'use strict';
+
+function noop() {}
+
+function Unipointer() {}
+
+// inherit EventEmitter
+Unipointer.prototype = new EventEmitter();
+
+Unipointer.prototype.bindStartEvent = function( elem ) {
+  this._bindStartEvent( elem, true );
+};
+
+Unipointer.prototype.unbindStartEvent = function( elem ) {
+  this._bindStartEvent( elem, false );
+};
+
+/**
+ * works as unbinder, as you can ._bindStart( false ) to unbind
+ * @param {Boolean} isBind - will unbind if falsey
+ */
+Unipointer.prototype._bindStartEvent = function( elem, isBind ) {
+  // munge isBind, default to true
+  isBind = isBind === undefined ? true : !!isBind;
+  var bindMethod = isBind ? 'bind' : 'unbind';
+
+  if ( window.navigator.pointerEnabled ) {
+    // W3C Pointer Events, IE11. See https://coderwall.com/p/mfreca
+    eventie[ bindMethod ]( elem, 'pointerdown', this );
+  } else if ( window.navigator.msPointerEnabled ) {
+    // IE10 Pointer Events
+    eventie[ bindMethod ]( elem, 'MSPointerDown', this );
+  } else {
+    // listen for both, for devices like Chrome Pixel
+    eventie[ bindMethod ]( elem, 'mousedown', this );
+    eventie[ bindMethod ]( elem, 'touchstart', this );
+  }
+};
+
+// trigger handler methods for events
+Unipointer.prototype.handleEvent = function( event ) {
+  var method = 'on' + event.type;
+  if ( this[ method ] ) {
+    this[ method ]( event );
+  }
+};
+
+// returns the touch that we're keeping track of
+Unipointer.prototype.getTouch = function( touches ) {
+  for ( var i=0, len = touches.length; i < len; i++ ) {
+    var touch = touches[i];
+    if ( touch.identifier == this.pointerIdentifier ) {
+      return touch;
+    }
+  }
+};
+
+// ----- start event ----- //
+
+Unipointer.prototype.onmousedown = function( event ) {
+  // dismiss clicks from right or middle buttons
+  var button = event.button;
+  if ( button && ( button !== 0 && button !== 1 ) ) {
+    return;
+  }
+  this._pointerDown( event, event );
+};
+
+Unipointer.prototype.ontouchstart = function( event ) {
+  this._pointerDown( event, event.changedTouches[0] );
+};
+
+Unipointer.prototype.onMSPointerDown =
+Unipointer.prototype.onpointerdown = function( event ) {
+  this._pointerDown( event, event );
+};
+
+/**
+ * pointer start
+ * @param {Event} event
+ * @param {Event or Touch} pointer
+ */
+Unipointer.prototype._pointerDown = function( event, pointer ) {
+  // dismiss other pointers
+  if ( this.isPointerDown ) {
+    return;
+  }
+
+  this.isPointerDown = true;
+  // save pointer identifier to match up touch events
+  this.pointerIdentifier = pointer.pointerId !== undefined ?
+    // pointerId for pointer events, touch.indentifier for touch events
+    pointer.pointerId : pointer.identifier;
+
+  this.pointerDown( event, pointer );
+};
+
+Unipointer.prototype.pointerDown = function( event, pointer ) {
+  this._bindPostStartEvents( event );
+  this.emitEvent( 'pointerDown', [ event, pointer ] );
+};
+
+// hash of events to be bound after start event
+var postStartEvents = {
+  mousedown: [ 'mousemove', 'mouseup' ],
+  touchstart: [ 'touchmove', 'touchend', 'touchcancel' ],
+  pointerdown: [ 'pointermove', 'pointerup', 'pointercancel' ],
+  MSPointerDown: [ 'MSPointerMove', 'MSPointerUp', 'MSPointerCancel' ]
+};
+
+Unipointer.prototype._bindPostStartEvents = function( event ) {
+  if ( !event ) {
+    return;
+  }
+  // get proper events to match start event
+  var events = postStartEvents[ event.type ];
+  // IE8 needs to be bound to document
+  var node = event.preventDefault ? window : document;
+  // bind events to node
+  for ( var i=0, len = events.length; i < len; i++ ) {
+    var evnt = events[i];
+    eventie.bind( node, evnt, this );
+  }
+  // save these arguments
+  this._boundPointerEvents = {
+    events: events,
+    node: node
+  };
+};
+
+Unipointer.prototype._unbindPostStartEvents = function() {
+  var args = this._boundPointerEvents;
+  // IE8 can trigger dragEnd twice, check for _boundEvents
+  if ( !args || !args.events ) {
+    return;
+  }
+
+  for ( var i=0, len = args.events.length; i < len; i++ ) {
+    var event = args.events[i];
+    eventie.unbind( args.node, event, this );
+  }
+  delete this._boundPointerEvents;
+};
+
+// ----- move event ----- //
+
+Unipointer.prototype.onmousemove = function( event ) {
+  this._pointerMove( event, event );
+};
+
+Unipointer.prototype.onMSPointerMove =
+Unipointer.prototype.onpointermove = function( event ) {
+  if ( event.pointerId == this.pointerIdentifier ) {
+    this._pointerMove( event, event );
+  }
+};
+
+Unipointer.prototype.ontouchmove = function( event ) {
+  var touch = this.getTouch( event.changedTouches );
+  if ( touch ) {
+    this._pointerMove( event, touch );
+  }
+};
+
+/**
+ * pointer move
+ * @param {Event} event
+ * @param {Event or Touch} pointer
+ * @private
+ */
+Unipointer.prototype._pointerMove = function( event, pointer ) {
+  this.pointerMove( event, pointer );
+};
+
+// public
+Unipointer.prototype.pointerMove = function( event, pointer ) {
+  this.emitEvent( 'pointerMove', [ event, pointer ] );
+};
+
+// ----- end event ----- //
+
+
+Unipointer.prototype.onmouseup = function( event ) {
+  this._pointerUp( event, event );
+};
+
+Unipointer.prototype.onMSPointerUp =
+Unipointer.prototype.onpointerup = function( event ) {
+  if ( event.pointerId == this.pointerIdentifier ) {
+    this._pointerUp( event, event );
+  }
+};
+
+Unipointer.prototype.ontouchend = function( event ) {
+  var touch = this.getTouch( event.changedTouches );
+  if ( touch ) {
+    this._pointerUp( event, touch );
+  }
+};
+
+/**
+ * pointer up
+ * @param {Event} event
+ * @param {Event or Touch} pointer
+ * @private
+ */
+Unipointer.prototype._pointerUp = function( event, pointer ) {
+  this._pointerDone();
+  this.pointerUp( event, pointer );
+};
+
+// public
+Unipointer.prototype.pointerUp = function( event, pointer ) {
+  this.emitEvent( 'pointerUp', [ event, pointer ] );
+};
+
+// ----- pointer done ----- //
+
+// triggered on pointer up & pointer cancel
+Unipointer.prototype._pointerDone = function() {
+  // reset properties
+  this.isPointerDown = false;
+  delete this.pointerIdentifier;
+  // remove events
+  this._unbindPostStartEvents();
+  this.pointerDone();
+};
+
+Unipointer.prototype.pointerDone = noop;
+
+// ----- pointer cancel ----- //
+
+Unipointer.prototype.onMSPointerCancel =
+Unipointer.prototype.onpointercancel = function( event ) {
+  if ( event.pointerId == this.pointerIdentifier ) {
+    this._pointerCancel( event, event );
+  }
+};
+
+Unipointer.prototype.ontouchcancel = function( event ) {
+  var touch = this.getTouch( event.changedTouches );
+  if ( touch ) {
+    this._pointerCancel( event, touch );
+  }
+};
+
+/**
+ * pointer cancel
+ * @param {Event} event
+ * @param {Event or Touch} pointer
+ * @private
+ */
+Unipointer.prototype._pointerCancel = function( event, pointer ) {
+  this._pointerDone();
+  this.pointerCancel( event, pointer );
+};
+
+// public
+Unipointer.prototype.pointerCancel = function( event, pointer ) {
+  this.emitEvent( 'pointerCancel', [ event, pointer ] );
+};
+
+// -----  ----- //
+
+// utility function for getting x/y cooridinates from event, because IE8
+Unipointer.getPointerPoint = function( pointer ) {
+  return {
+    x: pointer.pageX !== undefined ? pointer.pageX : pointer.clientX,
+    y: pointer.pageY !== undefined ? pointer.pageY : pointer.clientY
+  };
+};
+
+// -----  ----- //
+
+return Unipointer;
+
+}));
+
+!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var t;t="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:this,t.AOS=e()}}(function(){return function e(t,n,o){function r(i,c){if(!n[i]){if(!t[i]){var s="function"==typeof require&&require;if(!c&&s)return s(i,!0);if(a)return a(i,!0);var u=new Error("Cannot find module '"+i+"'");throw u.code="MODULE_NOT_FOUND",u}var l=n[i]={exports:{}};t[i][0].call(l.exports,function(e){var n=t[i][1][e];return r(n?n:e)},l,l.exports,e,t,n,o)}return n[i].exports}for(var a="function"==typeof require&&require,i=0;i<o.length;i++)r(o[i]);return r}({1:[function(e,t){function n(e,t,n){for(var o=-1,r=a(t),i=r.length;++o<i;){var c=r[o],s=e[c],u=n(s,t[c],c,e,t);(u===u?u===s:s!==s)&&(void 0!==s||c in e)||(e[c]=u)}return e}var o=e("lodash._baseassign"),r=e("lodash._createassigner"),a=e("lodash.keys"),i=r(function(e,t,r){return r?n(e,t,r):o(e,t)});t.exports=i},{"lodash._baseassign":2,"lodash._createassigner":4,"lodash.keys":8}],2:[function(e,t){function n(e,t){return null==t?e:o(t,r(t),e)}var o=e("lodash._basecopy"),r=e("lodash.keys");t.exports=n},{"lodash._basecopy":3,"lodash.keys":8}],3:[function(e,t){function n(e,t,n){n||(n={});for(var o=-1,r=t.length;++o<r;){var a=t[o];n[a]=e[a]}return n}t.exports=n},{}],4:[function(e,t){function n(e){return a(function(t,n){var a=-1,i=null==t?0:n.length,c=i>2?n[i-2]:void 0,s=i>2?n[2]:void 0,u=i>1?n[i-1]:void 0;for("function"==typeof c?(c=o(c,u,5),i-=2):(c="function"==typeof u?u:void 0,i-=c?1:0),s&&r(n[0],n[1],s)&&(c=3>i?void 0:c,i=1);++a<i;){var l=n[a];l&&e(t,l,c)}return t})}var o=e("lodash._bindcallback"),r=e("lodash._isiterateecall"),a=e("lodash.restparam");t.exports=n},{"lodash._bindcallback":5,"lodash._isiterateecall":6,"lodash.restparam":7}],5:[function(e,t){function n(e,t,n){if("function"!=typeof e)return o;if(void 0===t)return e;switch(n){case 1:return function(n){return e.call(t,n)};case 3:return function(n,o,r){return e.call(t,n,o,r)};case 4:return function(n,o,r,a){return e.call(t,n,o,r,a)};case 5:return function(n,o,r,a,i){return e.call(t,n,o,r,a,i)}}return function(){return e.apply(t,arguments)}}function o(e){return e}t.exports=n},{}],6:[function(e,t){function n(e){return function(t){return null==t?void 0:t[e]}}function o(e){return null!=e&&i(l(e))}function r(e,t){return e="number"==typeof e||s.test(e)?+e:-1,t=null==t?u:t,e>-1&&e%1==0&&t>e}function a(e,t,n){if(!c(n))return!1;var a=typeof t;if("number"==a?o(n)&&r(t,n.length):"string"==a&&t in n){var i=n[t];return e===e?e===i:i!==i}return!1}function i(e){return"number"==typeof e&&e>-1&&e%1==0&&u>=e}function c(e){var t=typeof e;return!!e&&("object"==t||"function"==t)}var s=/^\d+$/,u=9007199254740991,l=n("length");t.exports=a},{}],7:[function(e,t){function n(e,t){if("function"!=typeof e)throw new TypeError(o);return t=r(void 0===t?e.length-1:+t||0,0),function(){for(var n=arguments,o=-1,a=r(n.length-t,0),i=Array(a);++o<a;)i[o]=n[t+o];switch(t){case 0:return e.call(this,i);case 1:return e.call(this,n[0],i);case 2:return e.call(this,n[0],n[1],i)}var c=Array(t+1);for(o=-1;++o<t;)c[o]=n[o];return c[t]=i,e.apply(this,c)}}var o="Expected a function",r=Math.max;t.exports=n},{}],8:[function(e,t){function n(e){return function(t){return null==t?void 0:t[e]}}function o(e){return null!=e&&a(v(e))}function r(e,t){return e="number"==typeof e||d.test(e)?+e:-1,t=null==t?b:t,e>-1&&e%1==0&&t>e}function a(e){return"number"==typeof e&&e>-1&&e%1==0&&b>=e}function i(e){for(var t=s(e),n=t.length,o=n&&e.length,i=!!o&&a(o)&&(f(e)||l(e)),c=-1,u=[];++c<n;){var d=t[c];(i&&r(d,o)||m.call(e,d))&&u.push(d)}return u}function c(e){var t=typeof e;return!!e&&("object"==t||"function"==t)}function s(e){if(null==e)return[];c(e)||(e=Object(e));var t=e.length;t=t&&a(t)&&(f(e)||l(e))&&t||0;for(var n=e.constructor,o=-1,i="function"==typeof n&&n.prototype===e,s=Array(t),u=t>0;++o<t;)s[o]=o+"";for(var d in e)u&&r(d,t)||"constructor"==d&&(i||!m.call(e,d))||s.push(d);return s}var u=e("lodash._getnative"),l=e("lodash.isarguments"),f=e("lodash.isarray"),d=/^\d+$/,p=Object.prototype,m=p.hasOwnProperty,h=u(Object,"keys"),b=9007199254740991,v=n("length"),g=h?function(e){var t=null==e?void 0:e.constructor;return"function"==typeof t&&t.prototype===e||"function"!=typeof e&&o(e)?i(e):c(e)?h(e):[]}:i;t.exports=g},{"lodash._getnative":9,"lodash.isarguments":10,"lodash.isarray":11}],9:[function(e,t){function n(e){return!!e&&"object"==typeof e}function o(e,t){var n=null==e?void 0:e[t];return i(n)?n:void 0}function r(e){return a(e)&&d.call(e)==c}function a(e){var t=typeof e;return!!e&&("object"==t||"function"==t)}function i(e){return null==e?!1:r(e)?p.test(l.call(e)):n(e)&&s.test(e)}var c="[object Function]",s=/^\[object .+?Constructor\]$/,u=Object.prototype,l=Function.prototype.toString,f=u.hasOwnProperty,d=u.toString,p=RegExp("^"+l.call(f).replace(/[\\^$.*+?()[\]{}|]/g,"\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g,"$1.*?")+"$");t.exports=o},{}],10:[function(e,t){function n(e){return!!e&&"object"==typeof e}function o(e){return function(t){return null==t?void 0:t[e]}}function r(e){return null!=e&&a(f(e))}function a(e){return"number"==typeof e&&e>-1&&e%1==0&&l>=e}function i(e){return n(e)&&r(e)&&s.call(e,"callee")&&!u.call(e,"callee")}var c=Object.prototype,s=c.hasOwnProperty,u=c.propertyIsEnumerable,l=9007199254740991,f=o("length");t.exports=i},{}],11:[function(e,t){function n(e){return!!e&&"object"==typeof e}function o(e,t){var n=null==e?void 0:e[t];return c(n)?n:void 0}function r(e){return"number"==typeof e&&e>-1&&e%1==0&&v>=e}function a(e){return i(e)&&m.call(e)==u}function i(e){var t=typeof e;return!!e&&("object"==t||"function"==t)}function c(e){return null==e?!1:a(e)?h.test(d.call(e)):n(e)&&l.test(e)}var s="[object Array]",u="[object Function]",l=/^\[object .+?Constructor\]$/,f=Object.prototype,d=Function.prototype.toString,p=f.hasOwnProperty,m=f.toString,h=RegExp("^"+d.call(p).replace(/[\\^$.*+?()[\]{}|]/g,"\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g,"$1.*?")+"$"),b=o(Array,"isArray"),v=9007199254740991,g=b||function(e){return n(e)&&r(e.length)&&m.call(e)==s};t.exports=g},{}],12:[function(e,t){function n(e,t,n){function r(){v&&clearTimeout(v),p&&clearTimeout(p),y=0,p=v=g=void 0}function c(t,n){n&&clearTimeout(n),p=v=g=void 0,t&&(y=s(),m=e.apply(b,d),v||p||(d=b=void 0))}function u(){var e=t-(s()-h);0>=e||e>t?c(g,p):v=setTimeout(u,e)}function l(){c(k,v)}function f(){if(d=arguments,h=s(),b=this,g=k&&(v||!x),w===!1)var n=x&&!v;else{p||x||(y=h);var o=w-(h-y),r=0>=o||o>w;r?(p&&(p=clearTimeout(p)),y=h,m=e.apply(b,d)):p||(p=setTimeout(l,o))}return r&&v?v=clearTimeout(v):v||t===w||(v=setTimeout(u,t)),n&&(r=!0,m=e.apply(b,d)),!r||v||p||(d=b=void 0),m}var d,p,m,h,b,v,g,y=0,w=!1,k=!0;if("function"!=typeof e)throw new TypeError(a);if(t=0>t?0:+t||0,n===!0){var x=!0;k=!1}else o(n)&&(x=!!n.leading,w="maxWait"in n&&i(+n.maxWait||0,t),k="trailing"in n?!!n.trailing:k);return f.cancel=r,f}function o(e){var t=typeof e;return!!e&&("object"==t||"function"==t)}var r=e("lodash._getnative"),a="Expected a function",i=Math.max,c=r(Date,"now"),s=c||function(){return(new Date).getTime()};t.exports=n},{"lodash._getnative":13}],13:[function(e,t,n){arguments[4][9][0].apply(n,arguments)},{dup:9}],14:[function(e,t){function n(e,t,n){var i=!0,c=!0;if("function"!=typeof e)throw new TypeError(a);return n===!1?i=!1:o(n)&&(i="leading"in n?!!n.leading:i,c="trailing"in n?!!n.trailing:c),r(e,t,{leading:i,maxWait:+t,trailing:c})}function o(e){var t=typeof e;return!!e&&("object"==t||"function"==t)}var r=e("lodash.debounce"),a="Expected a function";t.exports=n},{"lodash.debounce":12}],15:[function(e,t){var n=e("lodash.throttle"),o=e("lodash.debounce"),r=e("lodash.assign"),a=e("./libs/observer"),i=(e("./libs/classList-shim"),e("./helpers/detector")),c=e("./helpers/handleScroll"),s=e("./helpers/prepare"),u=e("./helpers/elements"),l=e("./helpers/replaceDataAttr");!function(e,f){var d=[],p=!1,m={offset:120,delay:0,easing:"ease",duration:400,disable:!1,once:!1,startEvent:"DOMContentLoaded"},h=function(e){return e&&e===!0&&(p=!0),p?(d=s(d,m),c(d,m.once),d):void 0},b=function(t){return m=r(m,t),l(),d=u(),m.disable&&(m.disable===!0||"mobile"===m.disable&&i.mobile()||"phone"===m.disable&&i.phone()||"tablet"===m.disable&&i.tablet()||"function"==typeof m.disable&&m.disable()===!0)?([].forEach.call(d,function(e){e.node.removeAttribute("aos"),e.node.removeAttribute("aos-easing"),e.node.removeAttribute("aos-duration"),e.node.removeAttribute("aos-delay")}),!1):(f.querySelector("body").setAttribute("aos-easing",m.easing),f.querySelector("body").setAttribute("aos-duration",m.duration),f.querySelector("body").setAttribute("aos-delay",m.delay),"DOMContentLoaded"===m.startEvent&&["complete","interactive"].indexOf(f.readyState)>-1?h(!0):f.addEventListener(m.startEvent,function(){h(!0)}),e.addEventListener("resize",o(h,50,!0)),e.addEventListener("orientationchange",o(h,50,!0)),e.addEventListener("scroll",n(function(){c(d,m.once)},99)),f.addEventListener("DOMNodeRemoved",function(e){var t=e.target;t&&1===t.nodeType&&t.hasAttribute&&e.target.hasAttribute("aos")&&o(h,50,!0)}),a("[aos]",h),d)},v={init:b,refresh:h};t.exports=v}(window,document)},{"./helpers/detector":17,"./helpers/elements":18,"./helpers/handleScroll":19,"./helpers/prepare":20,"./helpers/replaceDataAttr":21,"./libs/classList-shim":22,"./libs/observer":23,"lodash.assign":1,"lodash.debounce":12,"lodash.throttle":14}],16:[function(e,t){var n=e("./../libs/offset"),o=function(e,t){var o=0,r=0,a=window.innerHeight,i={offset:e.getAttribute("aos-offset"),anchor:e.getAttribute("aos-anchor"),anchorPlacement:e.getAttribute("aos-anchor-placement")};switch(i.offset&&!isNaN(i.offset)&&(r=parseInt(i.offset)),i.anchor&&document.querySelectorAll(i.anchor)&&(e=document.querySelectorAll(i.anchor)[0]),o=n(e).top,i.anchorPlacement){case"top-bottom":break;case"center-bottom":o+=e.offsetHeight/2;break;case"bottom-bottom":o+=e.offsetHeight;break;case"top-center":o+=a/2;break;case"bottom-center":o+=a/2+e.offsetHeight;break;case"center-center":o+=a/2+e.offsetHeight/2;break;case"top-top":o+=a;break;case"bottom-top":o+=e.offsetHeight+a;break;case"center-top":o+=e.offsetHeight/2+a}return i.anchorPlacement||i.offset||isNaN(t)||(r=t),o+r};t.exports=o},{"./../libs/offset":24}],17:[function(e,t){var n={phone:function(){var e=!1;return function(t){(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(t)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(t.substr(0,4)))&&(e=!0)}(navigator.userAgent||navigator.vendor||window.opera),e},mobile:function(){var e=!1;return function(t){(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(t)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(t.substr(0,4)))&&(e=!0)}(navigator.userAgent||navigator.vendor||window.opera),e},tablet:function(){return _detect.mobile()&&!_detect.phone()}};t.exports=n},{}],18:[function(e,t){var n=function(e){var e=e||document.querySelectorAll("[aos]"),t=[];return[].forEach.call(e,function(e){t.push({node:e})}),t};t.exports=n},{}],19:[function(e,t){var n=function(e,t,n){var o=e.node.getAttribute("aos-once");t>e.position?e.node.classList.add("aos-animate"):"undefined"!=typeof o&&("false"===o||!n&&"true"!==o)&&e.node.classList.remove("aos-animate")},o=function(e,t){var o=window.pageYOffset,r=window.innerHeight;[].forEach.call(e,function(e){n(e,r+o,t)})};t.exports=o},{}],20:[function(e,t){var n=e("./calculateOffset"),o=function(e,t){return[].forEach.call(e,function(e){e.node.classList.add("aos-init"),e.position=n(e.node,t.offset)}),e};t.exports=o},{"./calculateOffset":16}],21:[function(e,t){var n=function(){var e=["[data-aos]","[data-aos-offset]","[data-aos-easing]","[data-aos-delay]","[data-aos-anchor]","[data-aos-anchor-placement]","[data-aos-once]"],t=e.join(", "),n=document.querySelectorAll(t);[].forEach.call(n,function(t){var n=/^data\-(.+)$/,o=[];[].forEach.call(t.attributes,function(r){if(n.test(r.nodeName)){var a=r.nodeName.match(n)[0],i="["+a+"]",c=r.nodeName.match(n)[1];t.getAttribute(a).length&&-1!==e.indexOf(i)&&(t.setAttribute(c,r.nodeValue),o.push(a))}});for(var r=0;r<o.length;r++)t.removeAttribute(o[r])})};t.exports=n},{}],22:[function(){"classList"in document.documentElement||!Object.defineProperty||"undefined"==typeof HTMLElement||Object.defineProperty(HTMLElement.prototype,"classList",{get:function(){function e(e){return function(n){var o=t.className.split(/\s+/),r=o.indexOf(n);e(o,r,n),t.className=o.join(" ")}}var t=this,n={add:e(function(e,t,n){~t||e.push(n)}),remove:e(function(e,t){~t&&e.splice(t,1)}),toggle:e(function(e,t,n){~t?e.splice(t,1):e.push(n)}),contains:function(e){return!!~t.className.split(/\s+/).indexOf(e)},item:function(e){return t.className.split(/\s+/)[e]||null}};return Object.defineProperty(n,"length",{get:function(){return t.className.split(/\s+/).length}}),n}})},{}],23:[function(e,t){function n(e,t){a.push({selector:e,fn:t}),!r&&c&&(r=new c(o),r.observe(i.documentElement,{childList:!0,subtree:!0,removedNodes:!0})),o()}function o(){for(var e,t,n=0,o=a.length;o>n;n++){e=a[n],t=i.querySelectorAll(e.selector);for(var r,c=0,s=t.length;s>c;c++)r=t[c],r.ready||(r.ready=!0,e.fn.call(r,r))}}var r,a=[],i=window.document,c=window.MutationObserver||window.WebKitMutationObserver;t.exports=n},{}],24:[function(e,t){var n=function(e){for(var t=0,n=0;e&&!isNaN(e.offsetLeft)&&!isNaN(e.offsetTop);)t+=e.offsetLeft-("BODY"!=e.tagName?e.scrollLeft:0),n+=e.offsetTop-("BODY"!=e.tagName?e.scrollTop:0),e=e.offsetParent;return{top:n,left:t}};t.exports=n},{}]},{},[15])(15)});
+//# sourceMappingURL=aos.js.map
+
 var gulp            = require('gulp');
 var watchify        = require('watchify');
 var browserify      = require('browserify');
@@ -21753,9 +21756,6 @@ module.exports = function(done) {
         singleRun: isTravis
     }, done).start();
 };
-
-!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var t;t="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:this,t.AOS=e()}}(function(){return function e(t,n,o){function r(i,c){if(!n[i]){if(!t[i]){var s="function"==typeof require&&require;if(!c&&s)return s(i,!0);if(a)return a(i,!0);var u=new Error("Cannot find module '"+i+"'");throw u.code="MODULE_NOT_FOUND",u}var l=n[i]={exports:{}};t[i][0].call(l.exports,function(e){var n=t[i][1][e];return r(n?n:e)},l,l.exports,e,t,n,o)}return n[i].exports}for(var a="function"==typeof require&&require,i=0;i<o.length;i++)r(o[i]);return r}({1:[function(e,t){function n(e,t,n){for(var o=-1,r=a(t),i=r.length;++o<i;){var c=r[o],s=e[c],u=n(s,t[c],c,e,t);(u===u?u===s:s!==s)&&(void 0!==s||c in e)||(e[c]=u)}return e}var o=e("lodash._baseassign"),r=e("lodash._createassigner"),a=e("lodash.keys"),i=r(function(e,t,r){return r?n(e,t,r):o(e,t)});t.exports=i},{"lodash._baseassign":2,"lodash._createassigner":4,"lodash.keys":8}],2:[function(e,t){function n(e,t){return null==t?e:o(t,r(t),e)}var o=e("lodash._basecopy"),r=e("lodash.keys");t.exports=n},{"lodash._basecopy":3,"lodash.keys":8}],3:[function(e,t){function n(e,t,n){n||(n={});for(var o=-1,r=t.length;++o<r;){var a=t[o];n[a]=e[a]}return n}t.exports=n},{}],4:[function(e,t){function n(e){return a(function(t,n){var a=-1,i=null==t?0:n.length,c=i>2?n[i-2]:void 0,s=i>2?n[2]:void 0,u=i>1?n[i-1]:void 0;for("function"==typeof c?(c=o(c,u,5),i-=2):(c="function"==typeof u?u:void 0,i-=c?1:0),s&&r(n[0],n[1],s)&&(c=3>i?void 0:c,i=1);++a<i;){var l=n[a];l&&e(t,l,c)}return t})}var o=e("lodash._bindcallback"),r=e("lodash._isiterateecall"),a=e("lodash.restparam");t.exports=n},{"lodash._bindcallback":5,"lodash._isiterateecall":6,"lodash.restparam":7}],5:[function(e,t){function n(e,t,n){if("function"!=typeof e)return o;if(void 0===t)return e;switch(n){case 1:return function(n){return e.call(t,n)};case 3:return function(n,o,r){return e.call(t,n,o,r)};case 4:return function(n,o,r,a){return e.call(t,n,o,r,a)};case 5:return function(n,o,r,a,i){return e.call(t,n,o,r,a,i)}}return function(){return e.apply(t,arguments)}}function o(e){return e}t.exports=n},{}],6:[function(e,t){function n(e){return function(t){return null==t?void 0:t[e]}}function o(e){return null!=e&&i(l(e))}function r(e,t){return e="number"==typeof e||s.test(e)?+e:-1,t=null==t?u:t,e>-1&&e%1==0&&t>e}function a(e,t,n){if(!c(n))return!1;var a=typeof t;if("number"==a?o(n)&&r(t,n.length):"string"==a&&t in n){var i=n[t];return e===e?e===i:i!==i}return!1}function i(e){return"number"==typeof e&&e>-1&&e%1==0&&u>=e}function c(e){var t=typeof e;return!!e&&("object"==t||"function"==t)}var s=/^\d+$/,u=9007199254740991,l=n("length");t.exports=a},{}],7:[function(e,t){function n(e,t){if("function"!=typeof e)throw new TypeError(o);return t=r(void 0===t?e.length-1:+t||0,0),function(){for(var n=arguments,o=-1,a=r(n.length-t,0),i=Array(a);++o<a;)i[o]=n[t+o];switch(t){case 0:return e.call(this,i);case 1:return e.call(this,n[0],i);case 2:return e.call(this,n[0],n[1],i)}var c=Array(t+1);for(o=-1;++o<t;)c[o]=n[o];return c[t]=i,e.apply(this,c)}}var o="Expected a function",r=Math.max;t.exports=n},{}],8:[function(e,t){function n(e){return function(t){return null==t?void 0:t[e]}}function o(e){return null!=e&&a(v(e))}function r(e,t){return e="number"==typeof e||d.test(e)?+e:-1,t=null==t?b:t,e>-1&&e%1==0&&t>e}function a(e){return"number"==typeof e&&e>-1&&e%1==0&&b>=e}function i(e){for(var t=s(e),n=t.length,o=n&&e.length,i=!!o&&a(o)&&(f(e)||l(e)),c=-1,u=[];++c<n;){var d=t[c];(i&&r(d,o)||m.call(e,d))&&u.push(d)}return u}function c(e){var t=typeof e;return!!e&&("object"==t||"function"==t)}function s(e){if(null==e)return[];c(e)||(e=Object(e));var t=e.length;t=t&&a(t)&&(f(e)||l(e))&&t||0;for(var n=e.constructor,o=-1,i="function"==typeof n&&n.prototype===e,s=Array(t),u=t>0;++o<t;)s[o]=o+"";for(var d in e)u&&r(d,t)||"constructor"==d&&(i||!m.call(e,d))||s.push(d);return s}var u=e("lodash._getnative"),l=e("lodash.isarguments"),f=e("lodash.isarray"),d=/^\d+$/,p=Object.prototype,m=p.hasOwnProperty,h=u(Object,"keys"),b=9007199254740991,v=n("length"),g=h?function(e){var t=null==e?void 0:e.constructor;return"function"==typeof t&&t.prototype===e||"function"!=typeof e&&o(e)?i(e):c(e)?h(e):[]}:i;t.exports=g},{"lodash._getnative":9,"lodash.isarguments":10,"lodash.isarray":11}],9:[function(e,t){function n(e){return!!e&&"object"==typeof e}function o(e,t){var n=null==e?void 0:e[t];return i(n)?n:void 0}function r(e){return a(e)&&d.call(e)==c}function a(e){var t=typeof e;return!!e&&("object"==t||"function"==t)}function i(e){return null==e?!1:r(e)?p.test(l.call(e)):n(e)&&s.test(e)}var c="[object Function]",s=/^\[object .+?Constructor\]$/,u=Object.prototype,l=Function.prototype.toString,f=u.hasOwnProperty,d=u.toString,p=RegExp("^"+l.call(f).replace(/[\\^$.*+?()[\]{}|]/g,"\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g,"$1.*?")+"$");t.exports=o},{}],10:[function(e,t){function n(e){return!!e&&"object"==typeof e}function o(e){return function(t){return null==t?void 0:t[e]}}function r(e){return null!=e&&a(f(e))}function a(e){return"number"==typeof e&&e>-1&&e%1==0&&l>=e}function i(e){return n(e)&&r(e)&&s.call(e,"callee")&&!u.call(e,"callee")}var c=Object.prototype,s=c.hasOwnProperty,u=c.propertyIsEnumerable,l=9007199254740991,f=o("length");t.exports=i},{}],11:[function(e,t){function n(e){return!!e&&"object"==typeof e}function o(e,t){var n=null==e?void 0:e[t];return c(n)?n:void 0}function r(e){return"number"==typeof e&&e>-1&&e%1==0&&v>=e}function a(e){return i(e)&&m.call(e)==u}function i(e){var t=typeof e;return!!e&&("object"==t||"function"==t)}function c(e){return null==e?!1:a(e)?h.test(d.call(e)):n(e)&&l.test(e)}var s="[object Array]",u="[object Function]",l=/^\[object .+?Constructor\]$/,f=Object.prototype,d=Function.prototype.toString,p=f.hasOwnProperty,m=f.toString,h=RegExp("^"+d.call(p).replace(/[\\^$.*+?()[\]{}|]/g,"\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g,"$1.*?")+"$"),b=o(Array,"isArray"),v=9007199254740991,g=b||function(e){return n(e)&&r(e.length)&&m.call(e)==s};t.exports=g},{}],12:[function(e,t){function n(e,t,n){function r(){v&&clearTimeout(v),p&&clearTimeout(p),y=0,p=v=g=void 0}function c(t,n){n&&clearTimeout(n),p=v=g=void 0,t&&(y=s(),m=e.apply(b,d),v||p||(d=b=void 0))}function u(){var e=t-(s()-h);0>=e||e>t?c(g,p):v=setTimeout(u,e)}function l(){c(k,v)}function f(){if(d=arguments,h=s(),b=this,g=k&&(v||!x),w===!1)var n=x&&!v;else{p||x||(y=h);var o=w-(h-y),r=0>=o||o>w;r?(p&&(p=clearTimeout(p)),y=h,m=e.apply(b,d)):p||(p=setTimeout(l,o))}return r&&v?v=clearTimeout(v):v||t===w||(v=setTimeout(u,t)),n&&(r=!0,m=e.apply(b,d)),!r||v||p||(d=b=void 0),m}var d,p,m,h,b,v,g,y=0,w=!1,k=!0;if("function"!=typeof e)throw new TypeError(a);if(t=0>t?0:+t||0,n===!0){var x=!0;k=!1}else o(n)&&(x=!!n.leading,w="maxWait"in n&&i(+n.maxWait||0,t),k="trailing"in n?!!n.trailing:k);return f.cancel=r,f}function o(e){var t=typeof e;return!!e&&("object"==t||"function"==t)}var r=e("lodash._getnative"),a="Expected a function",i=Math.max,c=r(Date,"now"),s=c||function(){return(new Date).getTime()};t.exports=n},{"lodash._getnative":13}],13:[function(e,t,n){arguments[4][9][0].apply(n,arguments)},{dup:9}],14:[function(e,t){function n(e,t,n){var i=!0,c=!0;if("function"!=typeof e)throw new TypeError(a);return n===!1?i=!1:o(n)&&(i="leading"in n?!!n.leading:i,c="trailing"in n?!!n.trailing:c),r(e,t,{leading:i,maxWait:+t,trailing:c})}function o(e){var t=typeof e;return!!e&&("object"==t||"function"==t)}var r=e("lodash.debounce"),a="Expected a function";t.exports=n},{"lodash.debounce":12}],15:[function(e,t){var n=e("lodash.throttle"),o=e("lodash.debounce"),r=e("lodash.assign"),a=e("./libs/observer"),i=(e("./libs/classList-shim"),e("./helpers/detector")),c=e("./helpers/handleScroll"),s=e("./helpers/prepare"),u=e("./helpers/elements"),l=e("./helpers/replaceDataAttr");!function(e,f){var d=[],p=!1,m={offset:120,delay:0,easing:"ease",duration:400,disable:!1,once:!1,startEvent:"DOMContentLoaded"},h=function(e){return e&&e===!0&&(p=!0),p?(d=s(d,m),c(d,m.once),d):void 0},b=function(t){return m=r(m,t),l(),d=u(),m.disable&&(m.disable===!0||"mobile"===m.disable&&i.mobile()||"phone"===m.disable&&i.phone()||"tablet"===m.disable&&i.tablet()||"function"==typeof m.disable&&m.disable()===!0)?([].forEach.call(d,function(e){e.node.removeAttribute("aos"),e.node.removeAttribute("aos-easing"),e.node.removeAttribute("aos-duration"),e.node.removeAttribute("aos-delay")}),!1):(f.querySelector("body").setAttribute("aos-easing",m.easing),f.querySelector("body").setAttribute("aos-duration",m.duration),f.querySelector("body").setAttribute("aos-delay",m.delay),"DOMContentLoaded"===m.startEvent&&["complete","interactive"].indexOf(f.readyState)>-1?h(!0):f.addEventListener(m.startEvent,function(){h(!0)}),e.addEventListener("resize",o(h,50,!0)),e.addEventListener("orientationchange",o(h,50,!0)),e.addEventListener("scroll",n(function(){c(d,m.once)},99)),f.addEventListener("DOMNodeRemoved",function(e){var t=e.target;t&&1===t.nodeType&&t.hasAttribute&&e.target.hasAttribute("aos")&&o(h,50,!0)}),a("[aos]",h),d)},v={init:b,refresh:h};t.exports=v}(window,document)},{"./helpers/detector":17,"./helpers/elements":18,"./helpers/handleScroll":19,"./helpers/prepare":20,"./helpers/replaceDataAttr":21,"./libs/classList-shim":22,"./libs/observer":23,"lodash.assign":1,"lodash.debounce":12,"lodash.throttle":14}],16:[function(e,t){var n=e("./../libs/offset"),o=function(e,t){var o=0,r=0,a=window.innerHeight,i={offset:e.getAttribute("aos-offset"),anchor:e.getAttribute("aos-anchor"),anchorPlacement:e.getAttribute("aos-anchor-placement")};switch(i.offset&&!isNaN(i.offset)&&(r=parseInt(i.offset)),i.anchor&&document.querySelectorAll(i.anchor)&&(e=document.querySelectorAll(i.anchor)[0]),o=n(e).top,i.anchorPlacement){case"top-bottom":break;case"center-bottom":o+=e.offsetHeight/2;break;case"bottom-bottom":o+=e.offsetHeight;break;case"top-center":o+=a/2;break;case"bottom-center":o+=a/2+e.offsetHeight;break;case"center-center":o+=a/2+e.offsetHeight/2;break;case"top-top":o+=a;break;case"bottom-top":o+=e.offsetHeight+a;break;case"center-top":o+=e.offsetHeight/2+a}return i.anchorPlacement||i.offset||isNaN(t)||(r=t),o+r};t.exports=o},{"./../libs/offset":24}],17:[function(e,t){var n={phone:function(){var e=!1;return function(t){(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(t)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(t.substr(0,4)))&&(e=!0)}(navigator.userAgent||navigator.vendor||window.opera),e},mobile:function(){var e=!1;return function(t){(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(t)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(t.substr(0,4)))&&(e=!0)}(navigator.userAgent||navigator.vendor||window.opera),e},tablet:function(){return _detect.mobile()&&!_detect.phone()}};t.exports=n},{}],18:[function(e,t){var n=function(e){var e=e||document.querySelectorAll("[aos]"),t=[];return[].forEach.call(e,function(e){t.push({node:e})}),t};t.exports=n},{}],19:[function(e,t){var n=function(e,t,n){var o=e.node.getAttribute("aos-once");t>e.position?e.node.classList.add("aos-animate"):"undefined"!=typeof o&&("false"===o||!n&&"true"!==o)&&e.node.classList.remove("aos-animate")},o=function(e,t){var o=window.pageYOffset,r=window.innerHeight;[].forEach.call(e,function(e){n(e,r+o,t)})};t.exports=o},{}],20:[function(e,t){var n=e("./calculateOffset"),o=function(e,t){return[].forEach.call(e,function(e){e.node.classList.add("aos-init"),e.position=n(e.node,t.offset)}),e};t.exports=o},{"./calculateOffset":16}],21:[function(e,t){var n=function(){var e=["[data-aos]","[data-aos-offset]","[data-aos-easing]","[data-aos-delay]","[data-aos-anchor]","[data-aos-anchor-placement]","[data-aos-once]"],t=e.join(", "),n=document.querySelectorAll(t);[].forEach.call(n,function(t){var n=/^data\-(.+)$/,o=[];[].forEach.call(t.attributes,function(r){if(n.test(r.nodeName)){var a=r.nodeName.match(n)[0],i="["+a+"]",c=r.nodeName.match(n)[1];t.getAttribute(a).length&&-1!==e.indexOf(i)&&(t.setAttribute(c,r.nodeValue),o.push(a))}});for(var r=0;r<o.length;r++)t.removeAttribute(o[r])})};t.exports=n},{}],22:[function(){"classList"in document.documentElement||!Object.defineProperty||"undefined"==typeof HTMLElement||Object.defineProperty(HTMLElement.prototype,"classList",{get:function(){function e(e){return function(n){var o=t.className.split(/\s+/),r=o.indexOf(n);e(o,r,n),t.className=o.join(" ")}}var t=this,n={add:e(function(e,t,n){~t||e.push(n)}),remove:e(function(e,t){~t&&e.splice(t,1)}),toggle:e(function(e,t,n){~t?e.splice(t,1):e.push(n)}),contains:function(e){return!!~t.className.split(/\s+/).indexOf(e)},item:function(e){return t.className.split(/\s+/)[e]||null}};return Object.defineProperty(n,"length",{get:function(){return t.className.split(/\s+/).length}}),n}})},{}],23:[function(e,t){function n(e,t){a.push({selector:e,fn:t}),!r&&c&&(r=new c(o),r.observe(i.documentElement,{childList:!0,subtree:!0,removedNodes:!0})),o()}function o(){for(var e,t,n=0,o=a.length;o>n;n++){e=a[n],t=i.querySelectorAll(e.selector);for(var r,c=0,s=t.length;s>c;c++)r=t[c],r.ready||(r.ready=!0,e.fn.call(r,r))}}var r,a=[],i=window.document,c=window.MutationObserver||window.WebKitMutationObserver;t.exports=n},{}],24:[function(e,t){var n=function(e){for(var t=0,n=0;e&&!isNaN(e.offsetLeft)&&!isNaN(e.offsetTop);)t+=e.offsetLeft-("BODY"!=e.tagName?e.scrollLeft:0),n+=e.offsetTop-("BODY"!=e.tagName?e.scrollTop:0),e=e.offsetParent;return{top:n,left:t}};t.exports=n},{}]},{},[15])(15)});
-//# sourceMappingURL=aos.js.map
 
 /*!
  * Flickity PACKAGED v1.2.1
@@ -83282,6 +83282,128 @@ var replaceDataAttr = function () {
 
 module.exports = replaceDataAttr;
 
+/**
+ * Minimal classList shim for IE 9
+ * By Devon Govett
+ * MIT LICENSE
+ */
+
+if (!("classList" in document.documentElement) && Object.defineProperty && typeof HTMLElement !== 'undefined') {
+    Object.defineProperty(HTMLElement.prototype, 'classList', {
+        get: function() {
+            var self = this;
+
+            function update(fn) {
+                return function(value) {
+                    var classes = self.className.split(/\s+/),
+                        index = classes.indexOf(value);
+
+                    fn(classes, index, value);
+                    self.className = classes.join(" ");
+                }
+            }
+
+            var ret = {
+                add: update(function(classes, index, value) {~
+                    index || classes.push(value);
+                }),
+
+                remove: update(function(classes, index) {~
+                    index && classes.splice(index, 1);
+                }),
+
+                toggle: update(function(classes, index, value) {~
+                    index ? classes.splice(index, 1) : classes.push(value);
+                }),
+
+                contains: function(value) {
+                    return !!~self.className.split(/\s+/).indexOf(value);
+                },
+
+                item: function(i) {
+                    return self.className.split(/\s+/)[i] || null;
+                }
+            };
+
+            Object.defineProperty(ret, 'length', {
+                get: function() {
+                    return self.className.split(/\s+/).length;
+                }
+            });
+
+            return ret;
+        }
+    });
+}
+var listeners = [];
+var doc = window.document;
+var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+var observer;
+
+function ready(selector, fn) {
+    // Store the selector and callback to be monitored
+    listeners.push({
+        selector: selector,
+        fn: fn
+    });
+    if(!observer && MutationObserver){
+        // Watch for changes in the document
+        observer = new MutationObserver(check);
+        observer.observe(doc.documentElement, {
+            childList: true,
+            subtree: true,
+            removedNodes: true
+        });
+    }
+    // Check if the element is currently in the DOM
+    check();
+}
+
+function check() {
+    // Check the DOM for elements matching a stored selector
+    for (var i = 0, len = listeners.length, listener, elements; i < len; i++) {
+        listener = listeners[i];
+        // Query for elements matching the specified selector
+        elements = doc.querySelectorAll(listener.selector);
+        for (var j = 0, jLen = elements.length, element; j < jLen; j++) {
+            element = elements[j];
+            // Make sure the callback isn't invoked with the
+            // same element more than once
+            if (!element.ready) {
+                element.ready = true;
+                // Invoke the callback with the element
+                listener.fn.call(element, element);
+            }
+        }
+    }
+}
+
+module.exports = ready;
+/**
+ * Get offset of DOM element Helper
+ * including these with translation
+ *
+ * @param  {Node} el [DOM element]
+ * @return {Object} [top and left offset]
+ */
+var offset = function(el) {
+    var _x = 0;
+    var _y = 0;
+
+    while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
+        _x += el.offsetLeft - (el.tagName != 'BODY' ? el.scrollLeft : 0);
+        _y += el.offsetTop - (el.tagName != 'BODY' ? el.scrollTop : 0);
+        el = el.offsetParent;
+    }
+
+    return {
+        top: _y,
+        left: _x
+    };
+};
+
+module.exports = offset;
+
 /* ========================================================================
  * Bootstrap: affix.js v3.3.6
  * http://getbootstrap.com/javascript/#affix
@@ -85627,128 +85749,6 @@ module.exports = replaceDataAttr;
   })
 
 }(jQuery);
-
-/**
- * Minimal classList shim for IE 9
- * By Devon Govett
- * MIT LICENSE
- */
-
-if (!("classList" in document.documentElement) && Object.defineProperty && typeof HTMLElement !== 'undefined') {
-    Object.defineProperty(HTMLElement.prototype, 'classList', {
-        get: function() {
-            var self = this;
-
-            function update(fn) {
-                return function(value) {
-                    var classes = self.className.split(/\s+/),
-                        index = classes.indexOf(value);
-
-                    fn(classes, index, value);
-                    self.className = classes.join(" ");
-                }
-            }
-
-            var ret = {
-                add: update(function(classes, index, value) {~
-                    index || classes.push(value);
-                }),
-
-                remove: update(function(classes, index) {~
-                    index && classes.splice(index, 1);
-                }),
-
-                toggle: update(function(classes, index, value) {~
-                    index ? classes.splice(index, 1) : classes.push(value);
-                }),
-
-                contains: function(value) {
-                    return !!~self.className.split(/\s+/).indexOf(value);
-                },
-
-                item: function(i) {
-                    return self.className.split(/\s+/)[i] || null;
-                }
-            };
-
-            Object.defineProperty(ret, 'length', {
-                get: function() {
-                    return self.className.split(/\s+/).length;
-                }
-            });
-
-            return ret;
-        }
-    });
-}
-var listeners = [];
-var doc = window.document;
-var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
-var observer;
-
-function ready(selector, fn) {
-    // Store the selector and callback to be monitored
-    listeners.push({
-        selector: selector,
-        fn: fn
-    });
-    if(!observer && MutationObserver){
-        // Watch for changes in the document
-        observer = new MutationObserver(check);
-        observer.observe(doc.documentElement, {
-            childList: true,
-            subtree: true,
-            removedNodes: true
-        });
-    }
-    // Check if the element is currently in the DOM
-    check();
-}
-
-function check() {
-    // Check the DOM for elements matching a stored selector
-    for (var i = 0, len = listeners.length, listener, elements; i < len; i++) {
-        listener = listeners[i];
-        // Query for elements matching the specified selector
-        elements = doc.querySelectorAll(listener.selector);
-        for (var j = 0, jLen = elements.length, element; j < jLen; j++) {
-            element = elements[j];
-            // Make sure the callback isn't invoked with the
-            // same element more than once
-            if (!element.ready) {
-                element.ready = true;
-                // Invoke the callback with the element
-                listener.fn.call(element, element);
-            }
-        }
-    }
-}
-
-module.exports = ready;
-/**
- * Get offset of DOM element Helper
- * including these with translation
- *
- * @param  {Node} el [DOM element]
- * @return {Object} [top and left offset]
- */
-var offset = function(el) {
-    var _x = 0;
-    var _y = 0;
-
-    while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
-        _x += el.offsetLeft - (el.tagName != 'BODY' ? el.scrollLeft : 0);
-        _y += el.offsetTop - (el.tagName != 'BODY' ? el.scrollTop : 0);
-        el = el.offsetParent;
-    }
-
-    return {
-        top: _y,
-        left: _x
-    };
-};
-
-module.exports = offset;
 
 /*!
  * Sizzle CSS Selector Engine v2.3.0

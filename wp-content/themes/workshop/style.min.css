@@ -87,7 +87,8 @@ html,body{margin:0;padding:0}*{box-sizing:border-box}h1,h2,h3,h4,h5,h6{margin:0}
 .hide{display:none}html{height:100%}body{height:100%;width:100%;position:relative}
 img{display:block;max-width:100%;height:auto;vertical-align:middle;-ms-interpolation-mode:bicubic}
 p{font-size:18px;line-height:26px;margin-bottom:1em}a:focus{outline:0}.img-responsive{max-width:100%}
-.container-fluid{max-width:1400px}.cf-800{max-width:900px}#loader_wrap{position:fixed;left:0;right:0;top:0;bottom:0;z-index:1031;background:#FFF}
+.container-fluid{max-width:1400px}.cf-800{max-width:900px}.nm{margin-left:0;margin-right:0}
+.np{padding-left:0;padding-right:0}#loader_wrap{position:fixed;left:0;right:0;top:0;bottom:0;z-index:1031;background:#FFF}
 #top{width:100%;height:100%;position:relative;background-size:cover}#section2 .intro{left:-150%;position:relative}
 #section2 p{display:none}.section{text-align:center}.intro p{width:50%;margin:0 auto;font-size:1.5em}
 #section1 h1{color:#444}#section1 p{color:#333;color:rgba(0,0,0,0.3)}#section1 img{margin:20px 0;opacity:.7}
@@ -100,8 +101,9 @@ p{font-size:18px;line-height:26px;margin-bottom:1em}a:focus{outline:0}.img-respo
 #social h4{font-size:2.4em;line-height:1.2em;padding:1.8em 0}.insta-gallery{background:#EEE}
 .insta-gallery img{display:block;height:600px}#map-canvas{max-width:100%;height:600px;padding:0}
 #map-canvas img{max-width:none}#infowindow-content{padding:20px 0 0}#infowindow-content ul{list-style:none;padding:0}
-#infowindow-content ul li{padding-bottom:3px;color:#000}#footer{text-align:center;padding:10px 0}
-@media(min-width:768px){.container{width:750px}.col-sm-1,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-10,.col-sm-11,.col-sm-12{float:left}
+#infowindow-content ul li{padding-bottom:3px;color:#000}#location{max-width:100%}
+#footer{text-align:center;padding:10px 0}@media(min-width:768px){.container{width:750px}
+.col-sm-1,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-10,.col-sm-11,.col-sm-12{float:left}
 .col-sm-1{width:8.3333333333%}.col-sm-2{width:16.6666666667%}.col-sm-3{width:25%}
 .col-sm-4{width:33.3333333333%}.col-sm-5{width:41.6666666667%}.col-sm-6{width:50%}
 .col-sm-7{width:58.3333333333%}.col-sm-8{width:66.6666666667%}.col-sm-9{width:75%}

@@ -89,6 +89,16 @@ a:focus {
     max-width: 900px;
 }
 
+.nm {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.np {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 // loader wrap
 
 #loader_wrap { 
@@ -268,6 +278,7 @@ a:focus {
     max-width: 100%;
     height: 600px;
     padding: 0px;
+    //display: inline-block;
     @include below(992px) {
       height: 300px;
     }
@@ -290,6 +301,10 @@ a:focus {
 #infowindow-content ul li {
     padding-bottom: 3px;
     color: #000;
+}
+
+#location {
+  max-width: 100%;
 }
 
 /* Footer
