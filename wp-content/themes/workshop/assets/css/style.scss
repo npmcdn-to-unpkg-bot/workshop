@@ -15,6 +15,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
 @import 'partials/mixins';
 @import 'vendor/pagepiling';
+@import 'vendor/aos';
 @import 'vendor/flickity';
 @import '../bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
 
@@ -145,11 +146,11 @@ a:focus {
 /* Section 1
  * --------------------------------------- */
 #section1 h1{
-  color: #444;
+  color: #FFF;
 }
 #section1 p{
-  color: #333;
-  color: rgba(0,0,0,0.3);
+  color: #FFF;
+  // color: rgba(0,0,0,0.3);
 }
 #section1 img{
   margin: 20px 0;
@@ -161,19 +162,10 @@ a:focus {
 #section2 h1,
 #section2 p{
   z-index: 3;
+  color: #FFF;
 }
 #section2 p{
   opacity: 0.8;
-}
-
-#section2 #colors{
-  right: 60px;
-  bottom: 0;
-  position: absolute;
-  height: 413px;
-  width: 258px;
-  background-image: url(imgs/colors.gif);
-  background-repeat: no-repeat;
 }
 
 // end page pile
@@ -237,6 +229,10 @@ a:focus {
 
 #services img {
   margin-bottom: 20px;
+}
+
+.row.alt {
+  text-align: right;
 }
 
 /* Social

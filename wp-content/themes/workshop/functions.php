@@ -64,7 +64,7 @@ function menu_removal () {
 }
 add_action('admin_menu', 'menu_removal');
 
-add_action( 'init', 'tryles_sliders' );
+/*add_action( 'init', 'tryles_sliders' );
 
 function tryles_sliders() {
     register_post_type( 'workshop_sliders',
@@ -94,10 +94,10 @@ function tryles_sliders() {
             'has_archive' => true
         )
     );
-}
+}*/
 
 // SLIDER SHORTCODE
-function slider_func( $atts, $content = null ){
+/*function slider_func( $atts, $content = null ){
     $a = shortcode_atts( array(
         'slider_name' => 'My Title',
     ), $atts );
@@ -129,5 +129,5 @@ function slider_func( $atts, $content = null ){
         }
 
     return $slider;
-}
+}*/
 add_shortcode( 'slider', 'slider_func' );

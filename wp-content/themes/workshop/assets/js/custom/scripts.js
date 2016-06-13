@@ -4,7 +4,7 @@
   * For details, see http://www.apache.org/licenses/LICENSE-2.0.
   */
 
-  $(window).load(function() {
+$(window).load(function() {
         
     if ( $('#loader_wrap').length > 0 ) {
         setTimeout(function() {
@@ -78,7 +78,11 @@ $(document).ready(function() {
         $.fn.pagepiling.moveSectionUp();
      });
 
- });
+});
+
+AOS.init({
+    easing: 'ease-in-out-sine'
+});
    
 var feed = new Instafeed({
     get: 'user',
