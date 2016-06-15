@@ -7,7 +7,7 @@ $intro_text = get_field('intro_text');
 
 $services_heading = get_field('services_heading');
 $services = get_field('services');
-
+$location = get_field('location');
 ?>
 
 <div id="loader_wrap"></div>
@@ -48,7 +48,7 @@ $services = get_field('services');
     <div class="container-fluid cf-800 intro">
         <div class="row">
             <div class="col-sm-12">
-                <h4><?php echo($intro_text)?></h4>
+                <h4 aos="fade-up" aos="aos-once"><?php echo($intro_text)?></h4>
             </div>
         </div>
     </div>  
@@ -58,7 +58,7 @@ $services = get_field('services');
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h4><?php echo($services_heading)?></h4>
+                <h4 aos="fade-up" aos="aos-once"><?php echo($services_heading)?></h4>
             </div>
         </div>
         
@@ -72,7 +72,7 @@ $services = get_field('services');
                     
                 echo '<div class="row">
                         <div class="col-md-6">
-                            <img aos="fade-up" src="' . $service['service_image'] . '" alt="">
+                            <img aos="fade-up" aos-once="true" aos-delay="500" src="' . $service['service_image'] . '" alt="">
                         </div>
                         <div class="col-md-6">
                             <h3>' . $service['service_title'] . '</h3>
@@ -84,7 +84,7 @@ $services = get_field('services');
 
                 echo '<div class="row alt">
                         <div class="col-md-6 col-md-push-6">
-                            <img aos="fade-up" src="' . $service['service_image'] . '" alt="">
+                            <img aos="fade-up" aos-once="true" aos-delay="500" src="' . $service['service_image'] . '" alt="">
                         </div>
                         <div class="col-md-6 col-md-pull-6">
                             <h3>' . $service['service_title'] . '</h3>
@@ -125,6 +125,7 @@ $services = get_field('services');
         <div class="col-sm-6 np">
             <div id="location">
                 <h2>Our Location</h2>
+                <?php echo ($location); ?>
             </div>
         </div>
     </div>
