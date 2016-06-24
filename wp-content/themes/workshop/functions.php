@@ -11,7 +11,8 @@ if ( version_compare( $GLOBALS['wp_version'], '4.1-alpha', '<' ) ) {
  */
 
 function workshop_scripts() {
-	wp_enqueue_style( 'workshop-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'fa-style', '//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' );
+    wp_enqueue_style( 'workshop-style', get_stylesheet_uri() );
     
     if (!is_admin() && $GLOBALS['pagenow'] != 'wp-login.php') {
         // comment out the next two lines to load the local copy of jQuery

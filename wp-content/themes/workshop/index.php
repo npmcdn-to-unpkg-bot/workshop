@@ -8,6 +8,10 @@ $intro_text = get_field('intro_text');
 $services_heading = get_field('services_heading');
 $services = get_field('services');
 $location = get_field('location');
+
+$fb = get_field('facebook_link');
+$tw = get_field('twitter_link');
+$ins = get_field('instagram_link');
 ?>
 
 <div id="loader_wrap"></div>
@@ -126,6 +130,14 @@ $location = get_field('location');
             <div id="location">
                 <h2>Our Location</h2>
                 <?php echo ($location); ?>
+                <ul class="icons share">
+                    <li class="email"><a title="Follow Us on Instagram" href="<?php if ($ins) { echo ($ins); }?>" target="_blank" ><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a></li>
+                    <li class="tw"><a title="Follow Us on Twitter" href="<?php if ($tw) { echo ($tw); }?>" target="_blank" ><i class="fa fa-twitter fa-2x"></i></a></li>
+                    <li class="fb"><a href="<?php if ($fb) { echo ($fb); }?>" target="_blank" title="Join Us on Facebook"><i class="fa fa-facebook fa-2x"></i></a></li>
+                </ul> <!-- .icons share -->
+                <span class="small">
+                    &copy; The Workshop Gilding <?php echo date("Y"); ?>.
+                </span>
             </div>
         </div>
     </div>

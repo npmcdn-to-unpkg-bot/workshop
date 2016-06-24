@@ -114,16 +114,94 @@ var MY_MAPTYPE_ID = 'custom_style';
 
 function initialize() {
 
-    var featureOpts = [{
-        "stylers": [{
-            "saturation": -100
-        }, {
-            "lightness": -5
-        }]
-    }];
+    var featureOpts = [
+  {
+    "stylers": [
+      { "saturation": -100 },
+      { "visibility": "simplified" }
+    ]
+  },{
+    "featureType": "road",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      { "visibility": "on" }
+    ]
+  },{
+    "featureType": "poi.park",
+    "elementType": "labels.icon",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "poi",
+    "elementType": "labels.icon",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "transit.station.airport",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "landscape",
+    "stylers": [
+      { "lightness": -40 }
+    ]
+  },{
+    "featureType": "poi",
+    "elementType": "geometry",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      { "lightness": -18 }
+    ]
+  },{
+    "featureType": "road.arterial",
+    "elementType": "geometry",
+    "stylers": [
+      { "lightness": 9 }
+    ]
+  },{
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      { "lightness": 61 }
+    ]
+  },{
+    "featureType": "road.local",
+    "elementType": "geometry",
+    "stylers": [
+      { "lightness": 4 }
+    ]
+  },{
+    "featureType": "road"  },{
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      { "hue": "#787978" }
+    ]
+  },{
+    "featureType": "road",
+    "elementType": "labels.text",
+    "stylers": [
+      { "lightness": -27 }
+    ]
+  },{
+    "featureType": "transit.station.airport",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+  }
+];
 
     var mapOptions = {
-        zoom: 17,
+        zoom: 13,
         center: franklin,
         mapTypeControl: false,
         scrollwheel: false,
@@ -131,7 +209,7 @@ function initialize() {
         zoomControlOptions: {
             position: google.maps.ControlPosition.LEFT_TOP
         },
-        streetViewControl: true,
+        streetViewControl: false,
         streetViewControlOptions: {
             position: google.maps.ControlPosition.LEFT_TOP
         },
@@ -159,11 +237,11 @@ function initialize() {
 
     var icon = {
         path: "M0-165c-27.618 0-50 21.966-50 49.054C-50-88.849 0 0 0 0s50-88.849 50-115.946C50-143.034 27.605-165 0-165z",
-        fillColor: '#c21f31',
-        fillOpacity: .8,
+        fillColor: '#e0d8a0',
+        fillOpacity: .99,
         anchor: new google.maps.Point(0, 0),
         strokeWeight: 0,
-        scale: 1 / 4
+        scale: 1 / 3
     }
 
     var marker = new google.maps.Marker({

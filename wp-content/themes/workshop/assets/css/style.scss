@@ -19,6 +19,9 @@ Use it to make something cool, have fun, and share what you've learned with othe
 @import 'vendor/flickity';
 @import '../bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
 
+// colors
+$primary: #000;
+
 html,
 body {
     margin: 0;
@@ -272,9 +275,15 @@ a:focus {
 
 #map-canvas {
     max-width: 100%;
-    height: 600px;
-    padding: 0px;
+    height: 500px;
+    // margin: 6%;
     //display: inline-block;
+    @include below(1600px) {
+      height: 400px;
+    }
+    @include below(1200px) {
+      height: 400px;
+    }
     @include below(992px) {
       height: 300px;
     }
@@ -301,6 +310,56 @@ a:focus {
 
 #location {
   max-width: 100%;
+}
+
+#location ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#map-canvas,
+#location {
+  margin: 7%;
+}
+
+#label ul {
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+  font-family: 'Helvetica Neue';
+  color: $primary;
+}
+
+#label a {
+  color: $primary;
+}
+
+ul.icons {
+  text-indent: 0 !important;
+  margin: 0 !important; }
+
+ul.share li {
+  display: inline-block; }
+
+ul.share li a {
+  padding-right: 20px;
+  color: black; }
+
+ul.share li a:hover, ul.share li a:active {
+  text-decoration: none;
+  color: #01DF01; }
+
+ul.share li a:focus {
+  color: black;
+}
+
+li.tw {
+  margin-left: -4px;
+}
+
+li.fb {
+  margin-left: -4px;
 }
 
 /* Footer
