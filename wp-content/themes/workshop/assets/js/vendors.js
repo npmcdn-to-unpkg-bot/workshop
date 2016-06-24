@@ -25,6 +25,131 @@ a);b(this).css("z-index",y);a||0!==b(".pp-section.active").length||b(this).addCl
 2+"px"),b("#pp-nav").find("li").eq(b(".pp-section.active").index(".pp-section")).find("a").addClass("active"));b(k).on("load",function(){var a=k.location.hash.replace("#",""),a=b(h).find('.pp-section[data-anchor="'+a+'"]');0<a.length&&l(a,c.animateAnchor)});b.isFunction(c.afterRender)&&c.afterRender.call(this)});b(k).on("hashchange",function(){var a=k.location.hash.replace("#","").split("/")[0];a.length&&a&&a!==A&&(a=isNaN(a)?b(h).find('[data-anchor="'+a+'"]'):b(".pp-section").eq(a-1),l(a))});b(h).keydown(function(a){if(c.keyboardScrolling&&
 !x())switch(a.which){case 38:case 33:e.moveSectionUp();break;case 40:case 34:e.moveSectionDown();break;case 36:e.moveTo(1);break;case 35:e.moveTo(b(".pp-section").length);break;case 37:e.moveSectionUp();break;case 39:e.moveSectionDown()}});c.normalScrollElements&&(b(h).on("mouseenter",c.normalScrollElements,function(){e.setMouseWheelScrolling(!1)}),b(h).on("mouseleave",c.normalScrollElements,function(){e.setMouseWheelScrolling(!0)}));var F=(new Date).getTime();b(h).on("click touchstart","#pp-nav a",
 function(a){a.preventDefault();a=b(this).parent().index();l(b(".pp-section").eq(a))});b(h).on({mouseenter:function(){var a=b(this).data("tooltip");b('<div class="pp-tooltip '+c.navigation.position+'">'+a+"</div>").hide().appendTo(b(this)).fadeIn(200)},mouseleave:function(){b(this).find(".pp-tooltip").fadeOut(200,function(){b(this).remove()})}},"#pp-nav li")}})(jQuery,document,window);
+
+$.scrollLock = ( function scrollLockClosure() {
+    'use strict';
+
+    var $html      = $( 'html' ),
+        // State: unlocked by default
+        locked     = false,
+        // State: scroll to revert to
+        prevScroll = {
+            scrollLeft : $( window ).scrollLeft(),
+            scrollTop  : $( window ).scrollTop()
+        },
+        // State: styles to revert to
+        prevStyles = {},
+        lockStyles = {
+            'overflow-y' : 'scroll',
+            'position'   : 'fixed',
+            'width'      : '100%'
+        };
+
+    // Instantiate cache in case someone tries to unlock before locking
+    saveStyles();
+
+    // Save context's inline styles in cache
+    function saveStyles() {
+        var styleAttr = $html.attr( 'style' ),
+            styleStrs = [],
+            styleHash = {};
+
+        if( !styleAttr ){
+            return;
+        }
+
+        styleStrs = styleAttr.split( /;\s/ );
+
+        $.each( styleStrs, function serializeStyleProp( styleString ){
+            if( !styleString ) {
+                return;
+            }
+
+            var keyValue = styleString.split( /\s:\s/ );
+
+            if( keyValue.length < 2 ) {
+                return;
+            }
+
+            styleHash[ keyValue[ 0 ] ] = keyValue[ 1 ];
+        } );
+
+        $.extend( prevStyles, styleHash );
+    }
+
+    function lock() {
+        var appliedLock = {};
+
+        // Duplicate execution will break DOM statefulness
+        if( locked ) {
+            return;
+        }
+
+        // Save scroll state...
+        prevScroll = {
+            scrollLeft : $( window ).scrollLeft(),
+            scrollTop  : $( window ).scrollTop()
+        };
+
+        // ...and styles
+        saveStyles();
+
+        // Compose our applied CSS
+        $.extend( appliedLock, lockStyles, {
+            // And apply scroll state as styles
+            'left' : - prevScroll.scrollLeft + 'px',
+            'top'  : - prevScroll.scrollTop  + 'px'
+        } );
+
+        // Then lock styles...
+        $html.css( appliedLock );
+
+        // ...and scroll state
+        $( window )
+            .scrollLeft( 0 )
+            .scrollTop( 0 );
+
+        locked = true;
+    }
+
+    function unlock() {
+        // Duplicate execution will break DOM statefulness
+        if( !locked ) {
+            return;
+        }
+
+        // Revert styles
+        $html.attr( 'style', $( '<x>' ).css( prevStyles ).attr( 'style' ) || '' );
+
+        // Revert scroll values
+        $( window )
+            .scrollLeft( prevScroll.scrollLeft )
+            .scrollTop(  prevScroll.scrollTop );
+
+        locked = false;
+    }
+
+    return function scrollLock( on ) {
+        // If an argument is passed, lock or unlock depending on truthiness
+        if( arguments.length ) {
+            if( on ) {
+                lock();
+            }
+            else {
+                unlock();
+            }
+        }
+        // Otherwise, toggle
+        else {
+            if( locked ){
+                unlock();
+            }
+            else {
+                lock();
+            }
+        }
+    };
+}() );
 /*!
  * Flickity PACKAGED v1.2.1
  * Touch, responsive, flickable galleries

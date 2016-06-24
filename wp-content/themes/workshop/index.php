@@ -17,19 +17,16 @@ $ins = get_field('instagram_link');
 <div id="loader_wrap"></div>
 
 <section id="top">
-    
-    <ul id="menu" style="position: absolute;top: 50%;right: 20px;z-index: 200; font-size: 3em;list-style:none;margin:0;padding:0;margin-top:-60px">
-        <li class="active"><a id="prev" href="#">Prev</a></li>
-        <li><a id="next" href="#">Next</a></li>
-    </ul>
 
     <div id="pagepiling">
         <div class="section" id="section1" style="background: url('<?php echo($image1)?>'); background-position: center center; background-repeat: no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
-            <h1>The Workshop</h1>
-            <p>Totally open to your imagination!</p>
-            <br />
+            <div class="overlay-layer"></div>
+            <div class="hello">
+                <a href="#" class="wordmark next">The Workshop</a>
+            </div>
         </div>
         <div class="section" id="section2" style="background: url('<?php echo($image2)?>'); background-position: center center; background-repeat: no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+            <div class="overlay-layer"></div>
             <div class="intro">
                 <h1>Feel free</h1>
                 <a style="display: inline-block;" href="#about" class="scroll"><img style="display: none;" src="http://placehold.it/540x320" alt=""></a>
@@ -61,8 +58,8 @@ $ins = get_field('instagram_link');
 <section id="services">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12">
-                <h4 aos="fade-up" aos="aos-once"><?php echo($services_heading)?></h4>
+            <div class="col-sm-12" style="text-align: center;">
+                <h2 aos="fade-up" aos="aos-once"><?php echo($services_heading)?></h2>
             </div>
         </div>
         

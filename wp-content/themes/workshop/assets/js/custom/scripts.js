@@ -30,9 +30,11 @@ $(document).ready(function() {
      });
 
      var deleteLog = false;
+
+     //$.scrollLock();
    
      $('#pagepiling').pagepiling({
-         menu: '#menu',
+         // menu: '#menu',
          // anchors: [],
          navigation: false,
          // anchors: ['page1', 'page2'],
@@ -59,8 +61,8 @@ $(document).ready(function() {
                      $('#section2').find('img').first().fadeIn(700, function(){
                          // $('#section2').find('p').last().fadeIn(600);
                      });
+                     $.scrollLock( false );
                  });
-
 
              }
 
@@ -68,12 +70,12 @@ $(document).ready(function() {
          }
      });
 
-     $( "#next" ).on( "click", function(e) {
+     $( ".next" ).on( "click", function(e) {
         e.preventDefault;
         $.fn.pagepiling.moveSectionDown();
      });
 
-     $( "#prev" ).on( "click", function(e) {
+     $( ".prev" ).on( "click", function(e) {
         e.preventDefault;
         $.fn.pagepiling.moveSectionUp();
      });

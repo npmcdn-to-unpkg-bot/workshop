@@ -18,9 +18,10 @@ Use it to make something cool, have fun, and share what you've learned with othe
 @import 'vendor/aos';
 @import 'vendor/flickity';
 @import '../bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
-
 // colors
 $primary: #000;
+$black: #000;
+$white: #FFF;
 
 html,
 body {
@@ -42,47 +43,88 @@ h6 {
     margin: 0;
 }
 
+
 /* force scrollbar, prevents initial gap */
+
 html {
-  overflow-y: scroll; 
+    overflow-y: scroll;
 }
 
 .hide {
-  display: none; 
+    display: none;
 }
+
 
 /* GENERAL STYLES
 ================================================== */
+
 html {
-  height: 100%; 
+    height: 100%;
 }
 
 body {
-  height: 100%;
-  width: 100%; 
-  position: relative;
+    height: 100%;
+    width: 100%;
+    position: relative;
 }
 
 img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  vertical-align: middle;
-  -ms-interpolation-mode: bicubic;
+    display: block;
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    -ms-interpolation-mode: bicubic;
 }
 
 p {
-  font-size: 18px;
-  line-height: 26px;
-  margin-bottom: 1em; 
+    font-size: 18px;
+    line-height: 26px;
+    margin-bottom: 1em;
+}
+
+a {
+  @include transition(all, 0.2s, ease-in-out);
+}
+
+.btn {
+    color: $black;
+    background: $white;
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 16px 20px;
+    border: 1px solid black;
+    font-size: 2em;
+    font-weight: 300;
+    text-decoration: none;
+
+    @include transition(all, 0.2s, ease-in-out);
+
+    &:hover {
+      background: $black;
+      color: $white;
+      text-decoration: none;
+    }
+
+    &:active {
+      background: $white;
+      color: $black;
+      text-decoration: none;
+    }
+
+    &:focus {
+      background: $white;
+      color: $black;
+      text-decoration: none;
+    }
 }
 
 a:focus {
-  outline: 0; 
+    outline: 0;
 }
 
 .img-responsive {
-  max-width: 100%; 
+    max-width: 100%;
 }
 
 .container-fluid {
@@ -94,25 +136,24 @@ a:focus {
 }
 
 .nm {
-  margin-left: 0;
-  margin-right: 0;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .np {
-  padding-left: 0;
-  padding-right: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 // loader wrap
-
-#loader_wrap { 
-    position: fixed; 
-    left: 0; 
-    right: 0; 
-    top: 0; 
-    bottom: 0; 
-    z-index: 1031; 
-    background: #FFF; 
+#loader_wrap {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1031;
+    background: $white;
 }
 
 #top {
@@ -126,58 +167,93 @@ a:focus {
 }
 
 // page pile
+.wordmark {
+    font-size: 4em;
+    color: $white;
+    text-decoration: none;
+    &:hover {
+        color: $white;
+        text-decoration: none;
+    }
+    &:focus {
+        color: $white;
+        text-decoration: none;
+    }
+    &:active {
+        color: $white;
+        text-decoration: none;
+    }
+}
 
 #section2 .intro {
-  left: -150%;
-  position: relative;
+    left: -150%;
+    position: relative;
 }
 
 #section2 p {
-  display: none;
+    display: none;
 }
 
-.section{
-  text-align: center;
+.section {
+    text-align: center;
 }
 
-.intro p{
-  width: 50%;
-  margin: 0 auto;
-  font-size: 1.5em;
+.intro p {
+    width: 50%;
+    margin: 0 auto;
+    font-size: 1.5em;
+}
+
+.overlay-layer {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 /* Section 1
  * --------------------------------------- */
-#section1 h1{
-  color: #FFF;
+
+#section {
+  text-align center;
 }
-#section1 p{
-  color: #FFF;
-  // color: rgba(0,0,0,0.3);
+
+#section1 h1 {
+    color: $white;
 }
-#section1 img{
-  margin: 20px 0;
-  opacity: 0.7;
+
+#section1 p {
+    color: $white;
+    // color: rgba(0,0,0,0.3);
 }
+
+.hello {
+  position: absolute;
+  z-index: 3;
+}
+
 
 /* Section 2
  * --------------------------------------- */
+
 #section2 h1,
-#section2 p{
-  z-index: 3;
-  color: #FFF;
+#section2 p {
+    z-index: 3;
+    color: $white;
 }
-#section2 p{
-  opacity: 0.8;
+
+#section2 p {
+    opacity: 0.8;
 }
 
 // end page pile
-
 .gallery {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  z-index: -1;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
 }
 
 .bottom {
@@ -202,14 +278,15 @@ a:focus {
 }
 
 #child img {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
+
 
 /* About
 ================================================== */
 
 #about {
-    background: #fff;
+    background: $white;
     width: 100%;
     // height: 100%;
     text-align: center;
@@ -223,26 +300,28 @@ a:focus {
     padding: 1.8em 0;
 }
 
+
 /* Services
 ================================================== */
 
 #services {
-  padding: 60px 0; 
+    //padding: 60px 0; 
 }
 
 #services img {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .row.alt {
-  text-align: right;
+    text-align: right;
 }
+
 
 /* Social
 ================================================== */
 
 #social {
-    background: #fff;
+    background: $white;
     width: 100%;
     // height: 100%;
     text-align: center;
@@ -255,6 +334,7 @@ a:focus {
     padding: 1.8em 0;
 }
 
+
 /* Image Gallery
 ================================================== */
 
@@ -264,11 +344,12 @@ a:focus {
 
 .insta-gallery img {
     display: block;
-    height: 600px; 
+    height: 600px;
     @include below(992px) {
-      height: 300px;
+        height: 300px;
     }
 }
+
 
 /* Contact
 ================================================== */
@@ -279,13 +360,13 @@ a:focus {
     // margin: 6%;
     //display: inline-block;
     @include below(1600px) {
-      height: 400px;
+        height: 400px;
     }
     @include below(1200px) {
-      height: 400px;
+        height: 400px;
     }
     @include below(992px) {
-      height: 300px;
+        height: 300px;
     }
 }
 
@@ -295,7 +376,7 @@ a:focus {
 }
 
 #infowindow-content {
-  padding: 20px 0 0;
+    padding: 20px 0 0;
 }
 
 #infowindow-content ul {
@@ -309,63 +390,81 @@ a:focus {
 }
 
 #location {
-  max-width: 100%;
+    max-width: 100%;
 }
 
 #location ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 #map-canvas,
 #location {
-  margin: 7%;
+    margin: 7%;
 }
 
 #label ul {
-  margin: 0;
-  padding: 10px;
-  list-style: none;
-  font-family: 'Helvetica Neue';
-  color: $primary;
+    margin: 0;
+    padding: 10px;
+    list-style: none;
+    font-family: 'Helvetica Neue';
+    color: $primary;
 }
 
 #label a {
-  color: $primary;
+    color: $primary;
+    &:hover {
+        color: $white;
+        text-decoration: none;
+    }
+    &:focus {
+        color: $primary;
+        text-decoration: none;
+    }
+    &:active {
+        color: $primary;
+        text-decoration: none;
+    }
 }
 
 ul.icons {
-  text-indent: 0 !important;
-  margin: 0 !important; }
+    text-indent: 0 !important;
+    margin: 0 0 20px 0!important;
+}
 
 ul.share li {
-  display: inline-block; }
+    display: inline-block;
+}
 
 ul.share li a {
-  padding-right: 20px;
-  color: black; }
+    padding-right: 20px;
+    color: black;
+}
 
-ul.share li a:hover, ul.share li a:active {
-  text-decoration: none;
-  color: #01DF01; }
+ul.share li a:hover,
+ul.share li a:active {
+    text-decoration: none;
+    color: #01DF01;
+}
 
 ul.share li a:focus {
-  color: black;
+    color: black;
 }
 
 li.tw {
-  margin-left: -4px;
+    margin-left: -4px;
 }
 
 li.fb {
-  margin-left: -4px;
+    margin-left: -4px;
 }
+
 
 /* Footer
 ================================================== */
 
 #footer {
-  text-align: center;
-  padding: 10px 0;
+    text-align: center;
+    padding: 10px 0;
 }
