@@ -167,7 +167,8 @@ a:focus {
 }
 
 // page pile
-.wordmark {
+.wordmark,
+.free {
     font-size: 4em;
     color: $white;
     text-decoration: none;
@@ -216,10 +217,6 @@ a:focus {
 /* Section 1
  * --------------------------------------- */
 
-#section {
-  text-align center;
-}
-
 #section1 h1 {
     color: $white;
 }
@@ -232,6 +229,8 @@ a:focus {
 .hello {
   position: absolute;
   z-index: 3;
+  text-align: center;
+  width: 100%;
 }
 
 

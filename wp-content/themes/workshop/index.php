@@ -28,8 +28,7 @@ $ins = get_field('instagram_link');
         <div class="section" id="section2" style="background: url('<?php echo($image2)?>'); background-position: center center; background-repeat: no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
             <div class="overlay-layer"></div>
             <div class="intro">
-                <h1>Feel free</h1>
-                <a style="display: inline-block;" href="#about" class="scroll"><img style="display: none;" src="http://placehold.it/540x320" alt=""></a>
+                <h1><a style="display: inline-block;" href="#about" class="free scroll">Feel free</a></h1>
             </div>
         </div>
     </div>
