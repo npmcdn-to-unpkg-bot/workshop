@@ -47,6 +47,14 @@ h6 {
     font-stretch: normal;
 }
 
+h2 {
+    font-size: 48px;
+}
+
+h3 {
+    font-size: 48px;
+}
+
 
 /* force scrollbar, prevents initial gap */
 
@@ -308,7 +316,7 @@ a:focus {
 #about h4 {
     font-size: 2.4em;
     line-height: 1.2em;
-    padding: 1.8em 0;
+    padding: 2em 0 1.8em;
 }
 
 
@@ -316,11 +324,24 @@ a:focus {
 ================================================== */
 
 #services {
-    //padding: 60px 0; 
+    padding: 60px 0; 
+}
+
+#services h2 {
+    margin-bottom: 48px;
 }
 
 #services img {
     margin-bottom: 20px;
+}
+
+#services .row {
+    margin-bottom: 60px;
+}
+
+#services .row:first-of-type,
+#services .row:last-of-type {
+    margin-bottom: 0;
 }
 
 .row.alt {
@@ -340,9 +361,9 @@ a:focus {
 }
 
 #social h4 {
-    font-size: 2.4em;
+    font-size: 32px;
     line-height: 1.2em;
-    padding: 1.8em 0;
+    padding: 60px 0;
 }
 
 
@@ -364,6 +385,12 @@ a:focus {
 
 /* Contact
 ================================================== */
+
+#contact h2 span {
+    display: inline-block;
+    min-width: 380px;
+    border-bottom: 1px solid $black;
+}
 
 #map-canvas {
     max-width: 100%;

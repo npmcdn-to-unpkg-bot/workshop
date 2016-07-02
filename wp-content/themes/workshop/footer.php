@@ -1,8 +1,9 @@
-<!-- <footer id="footer">
+<?php $copyright= get_field('copyright'); ?>
+<footer id="footer">
 	<span class="small">
-		&copy; The Workshop Gilding <?php echo date("Y"); ?>.
+		<?php if( $copyright ) { echo $copyright; } ?> <?php echo date("Y"); ?>.
 	</span>
-</footer> -->
+</footer>
 <!-- JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->

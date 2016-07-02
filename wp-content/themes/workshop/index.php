@@ -2,16 +2,24 @@
 
 // $gallery_images = get_field('gallery_images');
 $image1 = get_field('image1');
+
+$slide_text = get_field('slide_overlay_text');
 $image2 = get_field('image2');
+
 $intro_text = get_field('intro_text');
 
 $services_heading = get_field('services_heading');
 $services = get_field('services');
+
+$text_bar = get_field('text_bar');
+
+$location_heading = get_field('location_heading');
 $location = get_field('location');
 
 $fb = get_field('facebook_link');
 $tw = get_field('twitter_link');
 $ins = get_field('instagram_link');
+
 ?>
 
 <div id="loader_wrap"></div>
@@ -28,22 +36,13 @@ $ins = get_field('instagram_link');
         <div class="section" id="section2" style="background: url('<?php echo($image2)?>'); background-position: center center; background-repeat: no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
             <div class="overlay-layer"></div>
             <div class="intro">
-                <h1><a style="display: inline-block;" href="#about" class="free scroll">Feel free</a></h1>
+                <h1><a style="display: inline-block;" href="#about" class="free scroll"><?php if( $slide_text ) { echo $slide_text; }  ?></a></h1>
             </div>
         </div>
-    </div>
-
-    <!-- <div id="parent">
-        <div id="child">
-            <a href="#about" class="scroll"><img src="http://placehold.it/540x320" alt=""></a>
-            <h3 class="tagline centered">Foo Bar Baz<br>
-            </h3>
-        </div>
-    </div>    -->     
+    </div>  
 
 </section>    
 
-<!-- About Section -->
 <section id="about">
     <div class="container-fluid cf-800 intro">
         <div class="row">
@@ -108,7 +107,7 @@ $ins = get_field('instagram_link');
     <div class="container-fluid cf-800">
         <div class="row">
             <div class="col-sm-12">
-                <h4>Please come back and visit us soon when we finish our new site. In the meantime check us out on social media:</h4>
+                <?php if( $text_bar ) { echo '<h4>' . $text_bar . '</h4>'; }  ?>
             </div>
         </div>
     </div> 
@@ -124,16 +123,14 @@ $ins = get_field('instagram_link');
         </div>
         <div class="col-sm-6 np">
             <div id="location">
-                <h2>Our Location</h2>
-                <?php echo ($location); ?>
+                <?php if( $location_heading ) { echo '<h2><span>' . $location_heading . '</span></h2>'; }  ?>
+              
+                <?php if( $location ) { echo $location; } ?>
                 <ul class="icons share">
                     <li class="email"><a title="Follow Us on Instagram" href="<?php if ($ins) { echo ($ins); }?>" target="_blank" ><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a></li>
                     <li class="tw"><a title="Follow Us on Twitter" href="<?php if ($tw) { echo ($tw); }?>" target="_blank" ><i class="fa fa-twitter fa-2x"></i></a></li>
                     <li class="fb"><a href="<?php if ($fb) { echo ($fb); }?>" target="_blank" title="Join Us on Facebook"><i class="fa fa-facebook fa-2x"></i></a></li>
                 </ul> <!-- .icons share -->
-                <span class="small">
-                    &copy; The Workshop Gilding <?php echo date("Y"); ?>.
-                </span>
             </div>
         </div>
     </div>

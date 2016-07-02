@@ -53,23 +53,3 @@
 <!--[if lt IE 10]>
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
-
-<!-- <header id="header">
-
-	<nav class="site-nav" role="navigation">
-		<?php
-
-		$defaults = array(
-		'theme_location' => '',
-		'menu' => '',
-		'container' => '',
-		'menu_class' => 'nav',
-		'menu_id' => 'main-nav'
-		);
-
-		// wp_nav_menu( $defaults );
-
-		?>
-	</nav>	
-
-</header>  -->
