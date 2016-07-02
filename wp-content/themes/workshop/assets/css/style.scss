@@ -41,6 +41,10 @@ h4,
 h5,
 h6 {
     margin: 0;
+    font-family: 'Canela Web';
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
 }
 
 
@@ -66,6 +70,8 @@ body {
     height: 100%;
     width: 100%;
     position: relative;
+    font-family: 'Alegreya Sans', sans-serif;
+    font-weight: 300;
 }
 
 img {
@@ -169,9 +175,15 @@ a:focus {
 // page pile
 .wordmark,
 .free {
+    font-family: 'Canela Web';
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+
     font-size: 4em;
     color: $white;
     text-decoration: none;
+    text-transform: uppercase;
     &:hover {
         color: $white;
         text-decoration: none;
@@ -407,14 +419,14 @@ a:focus {
     margin: 0;
     padding: 10px;
     list-style: none;
-    font-family: 'Helvetica Neue';
+    // font-family: 'Helvetica Neue';
     color: $primary;
 }
 
 #label a {
     color: $primary;
     &:hover {
-        color: $white;
+        color: $primary;
         text-decoration: none;
     }
     &:focus {

@@ -22,6 +22,29 @@
 	    }
 	  }
 	}
+
+	var HOMEURL = "<?php bloginfo( 'url' ); ?>";
+	var THEMEURL = "<?php bloginfo( 'stylesheet_directory' ); ?>";
+
+	WebFontConfig = {
+	google: { families: [ 'Alegreya+Sans:400,400italic,500,500italic,300,300italic:latin' ] },
+		custom: {
+		families: [
+		 'Canela Web'
+		],
+		urls: [
+		 THEMEURL +'/assets/fonts/fonts.css'
+		]
+	},
+	timeout: 2000
+   };
+
+   (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+   })(document);
+
 </script>
 <?php wp_head(); ?>
 
