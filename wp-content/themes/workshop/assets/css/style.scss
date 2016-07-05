@@ -49,10 +49,12 @@ h6 {
 
 h2 {
     font-size: 48px;
+    line-height: 48px;
 }
 
 h3 {
     font-size: 48px;
+    line-height: 48px;
 }
 
 
@@ -181,7 +183,6 @@ a:focus {
 }
 
 // page pile
-.wordmark,
 .free {
     font-family: 'Canela Web';
     font-weight: 400;
@@ -189,19 +190,19 @@ a:focus {
     font-stretch: normal;
 
     font-size: 4em;
-    color: $white;
+    color: $black;
     text-decoration: none;
     text-transform: uppercase;
     &:hover {
-        color: $white;
+        color: $black;
         text-decoration: none;
     }
     &:focus {
-        color: $white;
+        color: $black;
         text-decoration: none;
     }
     &:active {
-        color: $white;
+        color: $black;
         text-decoration: none;
     }
 }
@@ -226,7 +227,7 @@ a:focus {
 }
 
 .overlay-layer {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(255, 255, 255, 0.4);
     position: absolute;
     top: 0;
     left: 0;
@@ -346,6 +347,9 @@ a:focus {
 
 .row.alt {
     text-align: right;
+    @include below(992px) {
+        text-align: left;
+    }
 }
 
 
@@ -388,7 +392,7 @@ a:focus {
 
 #contact h2 span {
     display: inline-block;
-    min-width: 380px;
+    // min-width: 380px;
     border-bottom: 1px solid $black;
 }
 
@@ -505,4 +509,9 @@ li.fb {
 #footer {
     text-align: center;
     padding: 10px 0;
+    @include below(992px) {
+        text-align: left;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 }

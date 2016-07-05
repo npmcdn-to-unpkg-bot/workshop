@@ -30,7 +30,7 @@ $ins = get_field('instagram_link');
         <div class="section" id="section1" style="background: url('<?php echo($image1)?>'); background-position: center center; background-repeat: no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
             <div class="overlay-layer"></div>
             <div class="hello">
-                <a href="#" class="wordmark next"><?php bloginfo( 'name' ); ?></a>
+                <a href="#" class="wordmark next"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/assets/img/workshop_logo.svg" alt="The Workshop"></a>
             </div>
         </div>
         <div class="section" id="section2" style="background: url('<?php echo($image2)?>'); background-position: center center; background-repeat: no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
