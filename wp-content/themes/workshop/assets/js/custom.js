@@ -39,7 +39,7 @@ $(document).ready(function() {
          navigation: false,
          // anchors: ['page1', 'page2'],
          easingcss3: 'ease-in-out',
-         sectionsColor: ['#bfda00', '#2ebe21'],
+         sectionsColor: ['#ffffff', '#eeeeee'],
          onLeave: function(index, nextIndex, direction){
              if(deleteLog){
                  //$('#callbacksDiv').html('');

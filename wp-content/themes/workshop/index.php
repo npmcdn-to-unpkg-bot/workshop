@@ -28,12 +28,10 @@ $ins = get_field('instagram_link');
 
     <div id="pagepiling">
         <div class="section" id="section1" style="background: url('<?php echo($image1)?>'); background-position: center center; background-repeat: no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+            <a href="#" class="wordmark next"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/assets/img/workshop_logo.svg" alt="The Workshop"></a>
             <div class="overlay-layer"></div>
-            <div class="hello">
-                <a href="#" class="wordmark next"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/assets/img/workshop_logo.svg" alt="The Workshop"></a>
-            </div>
         </div>
-        <div class="section" id="section2" style="background: url('<?php echo($image2)?>'); background-position: center center; background-repeat: no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+        <div class="section" id="section2">
             <div class="overlay-layer"></div>
             <div class="intro">
                 <h1><a style="display: inline-block;" href="#about" class="free scroll"><?php if( $slide_text ) { echo $slide_text; }  ?></a></h1>
