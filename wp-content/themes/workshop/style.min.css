@@ -307,7 +307,7 @@ figure{margin:0}img{vertical-align:middle}.img-responsive{display:block;max-widt
 .visible-print-inline{display:none !important}.visible-print-inline-block{display:none !important}
 html,body{margin:0;padding:0}*{box-sizing:border-box}h1,h2,h3,h4,h5,h6{margin:0;font-family:'Canela Web';font-weight:400;font-style:normal;font-stretch:normal}
 h2{font-size:48px;line-height:48px}h3{font-size:48px;line-height:48px}html{overflow-y:scroll}
-.hide{display:none}html{height:100%}body{height:100%;width:100%;position:relative;font-family:'Alegreya Sans',sans-serif;font-weight:300}
+.hide{display:none}html{height:100%}body{height:100%;width:100%;position:relative;font-family:'Alegreya Sans',sans-serif;font-weight:400}
 img{display:block;max-width:100%;height:auto;vertical-align:middle;-ms-interpolation-mode:bicubic}
 p{font-size:18px;line-height:26px;margin-bottom:1em}a{transition:all,0.2s,ease-in-out}
 .btn{color:#000;background:#FFF;display:inline-block;margin-top:20px;margin-bottom:20px;padding:16px 20px;border:1px solid black;font-size:2em;font-weight:300;text-decoration:none;transition:all,0.2s,ease-in-out}

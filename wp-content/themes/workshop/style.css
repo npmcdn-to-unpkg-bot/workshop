@@ -1138,7 +1138,7 @@ html { overflow-y: scroll; }
 ================================================== */
 html { height: 100%; }
 
-body { height: 100%; width: 100%; position: relative; font-family: 'Alegreya Sans', sans-serif; font-weight: 300; }
+body { height: 100%; width: 100%; position: relative; font-family: 'Alegreya Sans', sans-serif; font-weight: 400; }
 
 img { display: block; max-width: 100%; height: auto; vertical-align: middle; -ms-interpolation-mode: bicubic; }
 
